@@ -80,7 +80,7 @@ App.define('MiniMap', 'views/map', (function(fn, $, tmpl) {
 
         var w = (mapWidth * MINI_MAP_SCALE) + "px";     // resize the canvas CSS dimensions
         var h = (mapHeight * MINI_MAP_SCALE) + "px";     // resize the canvas CSS dimensions
-        console.log(w, h);
+
         miniMap.style.width = miniMapObjects.style.width = w;
         miniMap.style.height = miniMapObjects.style.height = h;
 

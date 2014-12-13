@@ -22,6 +22,7 @@ var jsPackages = [
     './src/javascript/main/core/config/Shortcut.js',
     './src/javascript/main/core/exceptions/*.js',
     './src/javascript/main/core/utils/*.js',
+    './src/javascript/main/engine/**/*.js',
     './src/javascript/main/maps/**/*.js',
     './src/javascript/main/views/**/*.js',
     './src/javascript/main/start.js'

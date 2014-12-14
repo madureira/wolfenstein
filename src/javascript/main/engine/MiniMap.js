@@ -2,21 +2,30 @@
  * Prototype responsible to build the minimap.
  *
  * @param fn contextFunction
- * @param $ selector engine
- * @param tmpl template engine
  *
  * @author rmadureira
  *
  */
-App.define('MiniMap', 'views/map', (function(fn, $, tmpl) {
+App.define('MiniMap', 'engine', (function(fn) {
     'use strict';
 
-    var MINI_MAP = 'minimap';
-    var MINI_MAP_OBJECT = 'minimapobjects';
-    var MINI_MAP_SCALE = 8;
+    var MINI_MAP = App.Properties.miniMapElementId;
+    var MINI_MAP_OBJECT = App.Properties.miniMapObjectElementId;
+    var MINI_MAP_SCALE = App.Properties.miniMapScale;
 
     var mapWidth = 0;
     var mapHeight = 0;
+
+    var WALL_BLOCKS_COLOR = App.Properties.miniMapBlocksColor;
+
+    var DEBUG_MODE = App.Properties.miniMapDebugMode;
+    var BLOCK_TO_DRAW_IN_DEBUG_MODE = 1;
+
+    fn  = function(levelMap, $selector) {
+        console.log('[MiniMap] Creating the mini map');
+        this.map = levelMap;
+        this.$selector = $selector;
+    };
 
     /**
      * build the miniMap.
@@ -24,14 +33,13 @@ App.define('MiniMap', 'views/map', (function(fn, $, tmpl) {
      * @return void
      */
     fn.prototype.init = function() {
-        this.map = App.maps.firstLevel;
         mapWidth = this.map[0].length;
         mapHeight = this.map.length;
         this.mapWidth = mapWidth;
         this.mapHeight = mapHeight;
         this.miniMapScale = MINI_MAP_SCALE;
 
-        _drawMiniMap(this.map);
+        _drawMiniMap(this.map, this.$selector);
     };
 
     /**
@@ -42,9 +50,9 @@ App.define('MiniMap', 'views/map', (function(fn, $, tmpl) {
      * @return void
      */
     fn.prototype.update = function(player) {
-        var miniMap = $(MINI_MAP);
+        var miniMap = this.$selector.byId(MINI_MAP);
 
-        this.miniMapObjects = $(MINI_MAP_OBJECT);
+        this.miniMapObjects = this.$selector.byId(MINI_MAP_OBJECT);
 
         var objectCtx = this.miniMapObjects.getContext("2d");
         objectCtx.clearRect(0, 0, miniMap.width, miniMap.height);
@@ -67,10 +75,10 @@ App.define('MiniMap', 'views/map', (function(fn, $, tmpl) {
         objectCtx.stroke();
     };
 
-    function _drawMiniMap(map) {
+    function _drawMiniMap(map, $selector) {
         // draw the topdown view minimap
-        var miniMap = $(MINI_MAP);
-        var miniMapObjects = $(MINI_MAP_OBJECT);
+        var miniMap = $selector.byId(MINI_MAP);
+        var miniMapObjects = $selector.byId(MINI_MAP_OBJECT);
 
         miniMap.width = mapWidth * MINI_MAP_SCALE; // resize the internal canvas dimensions
         miniMap.height = mapHeight * MINI_MAP_SCALE;
@@ -92,17 +100,35 @@ App.define('MiniMap', 'views/map', (function(fn, $, tmpl) {
 
                 // If there is a wall block at this (x,y)…
                 if (wall > 0) {
-                    ctx.fillStyle = 'rgb(200,200,200)';
+                    ctx.fillStyle = WALL_BLOCKS_COLOR;
 
                     // …Then draw a block on the minimap
-                    ctx.fillRect(
-                        x * MINI_MAP_SCALE,
-                        y * MINI_MAP_SCALE,
-                        MINI_MAP_SCALE, MINI_MAP_SCALE
-                    );
+                    _draw(ctx, x, y);
                 }
             }
         }
+    }
+
+    function _draw(ctx, x, y) {
+        if (DEBUG_MODE) {
+            var speedPaint = 25;
+            var timeToCall = BLOCK_TO_DRAW_IN_DEBUG_MODE * speedPaint;
+            BLOCK_TO_DRAW_IN_DEBUG_MODE++;
+
+            setTimeout(function() {
+                _paint(ctx, x, y);
+            }, timeToCall);
+        } else {
+            _paint(ctx, x, y);
+        }
+    }
+
+    function _paint(ctx, x, y) {
+        ctx.fillRect(
+            x * MINI_MAP_SCALE,
+            y * MINI_MAP_SCALE,
+            MINI_MAP_SCALE, MINI_MAP_SCALE
+        );
     }
 
     return fn;

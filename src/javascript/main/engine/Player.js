@@ -40,7 +40,7 @@ App.define('Player', 'engine', (function(fn) {
     /**
      * Move the player.
      *
-     * @param App.views.map.MiniMap miniMap
+     * @param App.engine.MiniMap miniMap
      *
      * @return void;
      */
@@ -74,19 +74,21 @@ App.define('Player', 'engine', (function(fn) {
     fn.prototype.setControls = function() {
         var self = this;
 
+        var direction = new App.engine.Controls();
+
         document.onkeydown = function(e) {
             e = e || window.event;
             switch (e.keyCode) {
-                case 38:
+                case direction.forwardKey:
                     self.speed = 1; break;
 
-                case 40:
+                case direction.backwardKey:
                     self.speed = -1; break;
 
-                case 37:
+                case direction.leftKey:
                     self.dir = -1; break;
 
-                case 39:
+                case direction.rightKey:
                     self.dir = 1; break;
             }
         };
@@ -94,12 +96,12 @@ App.define('Player', 'engine', (function(fn) {
         document.onkeyup = function(e) {
             e = e || window.event;
             switch (e.keyCode) {
-                case 38:
-                case 40:
+                case direction.forwardKey:
+                case direction.backwardKey:
                     self.speed = 0; break;
 
-                case 37:
-                case 39:
+                case direction.leftKey:
+                case direction.rightKey:
                     self.dir = 0; break;
             }
         };

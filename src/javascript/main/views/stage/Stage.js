@@ -11,7 +11,8 @@
 App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
     'use strict';
 
-    var MiniMapView = App.views.map.MiniMap,
+    var MiniMap = App.engine.MiniMap,
+        Screen = App.engine.Screen,
         GameCycle = App.engine.GameCycle,
         Player = App.engine.Player,
         Raycasting = App.engine.Raycasting;
@@ -22,30 +23,33 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
      * @return void
      */
     fn.prototype.init = function() {
-        _addCanvas();
-        _addMiniMap();
+        var $stage = $.byId(App.container);
+        _buildHTMLElements($stage);
+        _initGameCycle();
     };
 
-    function _addCanvas() {
-        var $stage = $(App.container);
-
-        $stage.innerHTML = tmpl.mini_map();
-        $stage.innerHTML += tmpl.mini_map_objects();
+    function _buildHTMLElements($stage) {
+        $stage.innerHTML += tmpl.screen();
+        $stage.innerHTML += tmpl.mini_map();
     }
 
-    function _addMiniMap() {
-        var mmView = new MiniMapView();
-        mmView.init();
-
-        _initGameCycle(mmView);
+    function _addScreen() {
     }
 
-    function _initGameCycle(miniMap) {
+    function _initGameCycle() {
+        var levelMap = App.maps.firstLevel;
+        var miniMap = new MiniMap(levelMap, $);
+        miniMap.init();
+
+        var screen = new Screen($);
+        screen.init();
+
         var gameCycle = new GameCycle();
         var player = new Player();
-        var raycasting = new Raycasting();
 
-        gameCycle.setElements(player, miniMap, raycasting).init();
+        var raycasting = new Raycasting(player, miniMap, screen);
+
+        gameCycle.setElements(player, miniMap, screen, raycasting).init();
     }
 
     return fn;

@@ -9,7 +9,7 @@
 App.define('GameCycle', 'engine', (function(fn) {
     'use strict';
 
-    var FPS = 30;
+    var FPS = App.Properties.fps;
 
     fn = function() {
         console.log('[GameCycle] Creating the Game Cycle');
@@ -19,21 +19,23 @@ App.define('GameCycle', 'engine', (function(fn) {
      * Set elements in game cycle and expose a method to init the cycle.
      *
      * @param App.engine.Player player
-     * @param App.views.map.MiniMap miniMap
+     * @param App.engine.MiniMap miniMap
      * @param App.engine.Raycasting raycasting
      *
      * @return Function init
      */
-    fn.prototype.setElements = function(player, miniMap, raycasting) {
+    fn.prototype.setElements = function(player, miniMap, screen, raycasting) {
         this.player = player;
         this.miniMap = miniMap;
         this.raycasting = raycasting;
+        this.screen = screen;
 
         App.engine.GameCycle.prototype.init = function() {
             var self = this;
             this.player = self.player;
             this.miniMap = self.miniMap;
             this.raycasting = self.raycasting;
+            this.screen = self.screen;
 
             var timer = 1000/FPS;
             //var timer = 3000;
@@ -42,7 +44,7 @@ App.define('GameCycle', 'engine', (function(fn) {
                 self.init();
                 self.player.move(self.miniMap);
                 self.miniMap.update(self.player);
-                self.raycasting.castRays(self.player, self.miniMap);
+                self.raycasting.castRays();
             }, timer);
         };
 

@@ -33,9 +33,6 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
         $stage.innerHTML += tmpl.mini_map();
     }
 
-    function _addScreen() {
-    }
-
     function _initGameCycle() {
         var levelMap = App.maps.firstLevel;
         var miniMap = new MiniMap(levelMap, $);
@@ -49,7 +46,9 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
 
         var raycasting = new Raycasting(player, miniMap, screen);
 
-        gameCycle.setElements(player, miniMap, screen, raycasting).init();
+        var cycle = gameCycle.setElements(player, miniMap, screen, raycasting);
+        cycle.init();
+        cycle.renderCycle();
     }
 
     return fn;

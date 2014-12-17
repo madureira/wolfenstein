@@ -12,8 +12,8 @@ App.define('Player', 'engine', (function(fn) {
     fn = function() {
         console.log('[Player] Creating a Player');
         // Current x, y position of the player
-        this.x = 16;
-        this.y = 10;
+        this.x = 10.5;
+        this.y = 6.5;
 
         // The direction that the player is turning,
         // either -1 for left or 1 for right
@@ -22,17 +22,20 @@ App.define('Player', 'engine', (function(fn) {
         // The current angle of rotation
         this.rot = 0;
 
+        // Add rotation if player is rotating (player.dir != 0)
+        this.rotDeg = 0;
+
         // Is the playing moving forward (speed = 1)
         // or backwards (speed = -1).
         this.speed = 0;
 
         // How far (in map units) does
         // the player move each step/update
-        this.moveSpeed = 0.18;
+        this.moveSpeed = 0.10;
 
         // How much does the player rotate each
         // step/update (in radians)
-        this.rotSpeed = 6 * Math.PI / 180;
+        this.rotSpeed = 3;
 
         this.setControls();
     };
@@ -41,16 +44,34 @@ App.define('Player', 'engine', (function(fn) {
      * Move the player.
      *
      * @param App.engine.MiniMap miniMap
+     * @param Integer timeDelta
+     * @param Integer gameCycleDelay
      *
      * @return void;
      */
-    fn.prototype.move = function(miniMap) {
+    fn.prototype.move = function(miniMap, timeDelta, gameCycleDelay) {
+        // Time timeDelta has passed since we moved last time
+        // We should have moved after time gameCycleDelay,
+        // so calculate how much we should multiply our
+        // movement to ensure game speed is contant
+        var mul = timeDelta / gameCycleDelay;
+
         // Player will move this far along
         // the current direction vector
-        var moveStep = this.speed * this.moveSpeed;
-
+        var moveStep = mul * this.speed * this.moveSpeed;
+        
         // Add rotation if player is rotating (player.dir != 0)
-        this.rot += this.dir * this.rotSpeed;
+        this.rotDeg += mul * this.dir * this.rotSpeed;
+        this.rotDeg %= 360;
+
+        var snap = (this.rotDeg + 360) % 90;
+        if (snap < 2 || snap > 88) {
+            this.rotDeg = Math.round(this.rotDeg / 90) * 90;
+        }
+
+        this.rot = this.rotDeg * Math.PI / 180;
+
+        //this.rot += this.dir * this.rotSpeed;
 
         // Calculate new player position with simple trigonometry
         var newX = this.x + Math.cos(this.rot) * moveStep;

@@ -72,39 +72,9 @@ App.define('Player', 'engine', (function(fn) {
      * @return void
      */
     fn.prototype.setControls = function() {
-        var self = this;
+        var constrols = new App.engine.Controls();
 
-        var direction = new App.engine.Controls();
-
-        document.onkeydown = function(e) {
-            e = e || window.event;
-            switch (e.keyCode) {
-                case direction.forwardKey:
-                    self.speed = 1; break;
-
-                case direction.backwardKey:
-                    self.speed = -1; break;
-
-                case direction.leftKey:
-                    self.dir = -1; break;
-
-                case direction.rightKey:
-                    self.dir = 1; break;
-            }
-        };
-
-        document.onkeyup = function(e) {
-            e = e || window.event;
-            switch (e.keyCode) {
-                case direction.forwardKey:
-                case direction.backwardKey:
-                    self.speed = 0; break;
-
-                case direction.leftKey:
-                case direction.rightKey:
-                    self.dir = 0; break;
-            }
-        };
+        controls.keyboardMap(this);
     };
 
     function _isColliding(playerX, playerY, miniMap) {

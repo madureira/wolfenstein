@@ -11,6 +11,12 @@ App.define('GameCycle', 'engine', (function(fn) {
 
     var FPS = App.Properties.fps;
 
+    var GAME_CYCLE_DELAY = 1000/FPS;
+    //var GAME_CYCLE_DELAY = 3000;
+
+    var lastGameCycleTime = 0;
+    var lastRenderCycleTime = 0;
+
     fn = function() {
         console.log('[GameCycle] Creating the Game Cycle');
     };
@@ -31,21 +37,62 @@ App.define('GameCycle', 'engine', (function(fn) {
         this.screen = screen;
 
         App.engine.GameCycle.prototype.init = function() {
+            var now = new Date().getTime();
+
+            // Time since last game logic
+            var timeDelta = now - lastGameCycleTime;
+
             var self = this;
             this.player = self.player;
+
+            self.player.move(self.miniMap, timeDelta, GAME_CYCLE_DELAY);
+
             this.miniMap = self.miniMap;
             this.raycasting = self.raycasting;
             this.screen = self.screen;
 
-            var timer = 1000/FPS;
-            //var timer = 3000;
+            var cycleDelay = GAME_CYCLE_DELAY;
+
+            // The timer will likely not run that fast
+            // due to the rendering cycle hogging the CPU
+            // so figure out how much time was lost since last cycle
+            if (timeDelta > cycleDelay) {
+                cycleDelay = Math.max(1, cycleDelay - (timeDelta - cycleDelay));
+            }
+
+            lastGameCycleTime = now;
 
             setTimeout(function() {
                 self.init();
-                self.player.move(self.miniMap);
-                self.miniMap.update(self.player);
-                self.raycasting.castRays();
-            }, timer);
+            }, cycleDelay);
+        };
+
+
+        App.engine.GameCycle.prototype.renderCycle = function() {
+            var self = this;
+
+            this.miniMap.update(this.player);
+            this.raycasting.castRays();
+
+            // time since last rendering
+            var now = new Date().getTime();
+            var timeDelta = now - lastRenderCycleTime;
+            var cycleDelay = GAME_CYCLE_DELAY;
+
+            if (timeDelta > cycleDelay) {
+                cycleDelay = Math.max(1, cycleDelay - (timeDelta - cycleDelay));
+            }
+
+            lastRenderCycleTime = now;
+
+            setTimeout(function() {
+                self.renderCycle();
+            }, cycleDelay);
+
+            //fps = 1000 / timeDelta;
+            //if (showOverlay) {
+                //updateOverlay();
+            //}
         };
 
         // expose private method as public after set the player.

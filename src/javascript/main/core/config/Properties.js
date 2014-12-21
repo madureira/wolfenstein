@@ -21,18 +21,29 @@ App.Properties = {
 
     templateEngine: App.template,
     texturesPath: 'src/resources/textures/',
-    fps: 30,
-    playerSpeed: 0.20,
+    fps: 40,
+
+    // Initial position of the player
+    playerInitialX: 10.5,
+    playerInitialY: 6.5,
+
+    // How far (in map units) does the player move each step/update
+    playerSpeed: 0.10,
+
+    // How much does the player rotate each step/update (in radians)
+    playerRotateSpeed: 2,
+
     raycastingColor: 'rgba(0,100,0,0.3)',
 
-    screenWidth: 320,
-    screenHeight: 200,
+    screenWidth: 1280,
+    screenHeight: 720,
     stripWidth: 2,
 
     miniMapElementId: 'minimap',
     miniMapObjectElementId: 'minimapobjects',
     miniMapScale: 8,
-    miniMapBlocksColor: 'rgb(200,200,200)',
+    //miniMapBlocksColor: 'rgb(200,200,200)',
+    miniMapBlocksColor: '#000',
     miniMapDebugMode: false
 
 };

@@ -9,6 +9,8 @@
 App.define('Controls', 'engine', (function(fn) {
     'use strict';
 
+    var MAP_ENABLED = false;
+
     fn = function() {
         // up, W
         this.forwardKey = [38, 87];
@@ -21,6 +23,8 @@ App.define('Controls', 'engine', (function(fn) {
 
         // left, A
         this.leftKey = [37, 65];
+
+        this.enableMap = 77;
     };
 
     /**
@@ -30,6 +34,10 @@ App.define('Controls', 'engine', (function(fn) {
      */
     fn.prototype.keyboardMap = function(player) {
         var self = this;
+
+        var $selector = App.Properties.selectorEngine;
+
+        var $minimap = $selector.byId('minimap-container');
 
         document.onkeydown = function(e) {
             e = e || window.event;
@@ -49,6 +57,15 @@ App.define('Controls', 'engine', (function(fn) {
                 case self.rightKey[0]:
                 case self.rightKey[1]:
                     player.dir = 1; break;
+
+                case self.enableMap:
+                    if (MAP_ENABLED) {
+                        MAP_ENABLED = false;
+                        $minimap.style.display = 'none';
+                    } else {
+                        MAP_ENABLED = true;
+                        $minimap.style.display = 'block';
+                    }
             }
         };
 

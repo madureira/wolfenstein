@@ -11,9 +11,9 @@ App.define('Player', 'engine', (function(fn) {
 
     fn = function() {
         console.log('[Player] Creating a Player');
-        // Current x, y position of the player
-        this.x = 10.5;
-        this.y = 6.5;
+
+        this.x = App.Properties.playerInitialX;
+        this.y = App.Properties.playerInitialY;
 
         // The direction that the player is turning,
         // either -1 for left or 1 for right
@@ -29,13 +29,9 @@ App.define('Player', 'engine', (function(fn) {
         // or backwards (speed = -1).
         this.speed = 0;
 
-        // How far (in map units) does
-        // the player move each step/update
         this.moveSpeed = App.Properties.playerSpeed;
 
-        // How much does the player rotate each
-        // step/update (in radians)
-        this.rotSpeed = 3;
+        this.rotSpeed = App.Properties.playerRotateSpeed;
 
         this.setControls();
     };

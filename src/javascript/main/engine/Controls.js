@@ -10,6 +10,7 @@ App.define('Controls', 'engine', (function(fn) {
     'use strict';
 
     var MAP_ENABLED = false;
+    var FPS_DISPLAY_ENABLED = false;
 
     fn = function() {
         // up, W
@@ -24,7 +25,11 @@ App.define('Controls', 'engine', (function(fn) {
         // left, A
         this.leftKey = [37, 65];
 
+        // M
         this.enableMap = 77;
+
+        // F
+        this.enableFPSDisplay = 70;
     };
 
     /**
@@ -38,6 +43,7 @@ App.define('Controls', 'engine', (function(fn) {
         var $selector = App.Properties.selectorEngine;
 
         var $minimap = $selector.byId('minimap-container');
+        var $fpsDisplay = $selector.byId('fps-debug');
 
         document.onkeydown = function(e) {
             e = e || window.event;
@@ -66,6 +72,17 @@ App.define('Controls', 'engine', (function(fn) {
                         MAP_ENABLED = true;
                         $minimap.style.display = 'block';
                     }
+                    break;
+
+                case self.enableFPSDisplay:
+                    if (FPS_DISPLAY_ENABLED) {
+                        FPS_DISPLAY_ENABLED = false;
+                        $fpsDisplay.style.display = 'none';
+                    } else {
+                        FPS_DISPLAY_ENABLED = true;
+                        $fpsDisplay.style.display = 'block';
+                    }
+                    break;
             }
         };
 

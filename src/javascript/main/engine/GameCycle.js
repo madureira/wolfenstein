@@ -35,6 +35,7 @@ App.define('GameCycle', 'engine', (function(fn) {
         this.miniMap = miniMap;
         this.raycasting = raycasting;
         this.screen = screen;
+        this.fpsDebug = new App.engine.FPSDebug();
 
         App.engine.GameCycle.prototype.init = function() {
             var now = new Date().getTime();
@@ -46,10 +47,6 @@ App.define('GameCycle', 'engine', (function(fn) {
             this.player = self.player;
 
             self.player.move(self.miniMap, timeDelta, GAME_CYCLE_DELAY);
-
-            this.miniMap = self.miniMap;
-            this.raycasting = self.raycasting;
-            this.screen = self.screen;
 
             var cycleDelay = GAME_CYCLE_DELAY;
 
@@ -85,19 +82,17 @@ App.define('GameCycle', 'engine', (function(fn) {
 
             lastRenderCycleTime = now;
 
+            self.fpsDebug.update(1000 / timeDelta);
+
             setTimeout(function() {
                 self.renderCycle();
             }, cycleDelay);
-
-            //fps = 1000 / timeDelta;
-            //if (showOverlay) {
-                //updateOverlay();
-            //}
         };
 
         // expose private method as public after set the player.
         return this;
     };
+
 
     return fn;
 

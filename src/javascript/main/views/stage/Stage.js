@@ -31,6 +31,7 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
     function _buildHTMLElements($stage) {
         $stage.innerHTML += tmpl.screen();
         $stage.innerHTML += tmpl.mini_map();
+        $stage.innerHTML += tmpl.fps_debug();
     }
 
     function _initGameCycle() {

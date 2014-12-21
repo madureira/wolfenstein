@@ -10,10 +10,17 @@ App.define('Controls', 'engine', (function(fn) {
     'use strict';
 
     fn = function() {
-        this.forwardKey = 38;
-        this.backwardKey = 40;
-        this.rightKey = 39;
-        this.leftKey = 37;
+        // up, W
+        this.forwardKey = [38, 87];
+
+        // down, S
+        this.backwardKey = [40, 83];
+
+        // right, D
+        this.rightKey = [39, 68];
+
+        // left, A
+        this.leftKey = [37, 65];
     };
 
     /**
@@ -27,16 +34,20 @@ App.define('Controls', 'engine', (function(fn) {
         document.onkeydown = function(e) {
             e = e || window.event;
             switch (e.keyCode) {
-                case self.forwardKey:
+                case self.forwardKey[0]:
+                case self.forwardKey[1]:
                     player.speed = 1; break;
 
-                case self.backwardKey:
+                case self.backwardKey[0]:
+                case self.backwardKey[1]:
                     player.speed = -1; break;
 
-                case self.leftKey:
+                case self.leftKey[0]:
+                case self.leftKey[1]:
                     player.dir = -1; break;
 
-                case self.rightKey:
+                case self.rightKey[0]:
+                case self.rightKey[1]:
                     player.dir = 1; break;
             }
         };
@@ -44,12 +55,16 @@ App.define('Controls', 'engine', (function(fn) {
         document.onkeyup = function(e) {
             e = e || window.event;
             switch (e.keyCode) {
-                case self.forwardKey:
-                case self.backwardKey:
+                case self.forwardKey[0]:
+                case self.forwardKey[1]:
+                case self.backwardKey[0]:
+                case self.backwardKey[1]:
                     player.speed = 0; break;
 
-                case self.leftKey:
-                case self.rightKey:
+                case self.leftKey[0]:
+                case self.leftKey[1]:
+                case self.rightKey[0]:
+                case self.rightKey[1]:
                     player.dir = 0; break;
             }
         };

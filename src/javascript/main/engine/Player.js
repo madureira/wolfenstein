@@ -31,7 +31,7 @@ App.define('Player', 'engine', (function(fn) {
 
         // How far (in map units) does
         // the player move each step/update
-        this.moveSpeed = 0.10;
+        this.moveSpeed = App.Properties.playerSpeed;
 
         // How much does the player rotate each
         // step/update (in radians)
@@ -59,7 +59,7 @@ App.define('Player', 'engine', (function(fn) {
         // Player will move this far along
         // the current direction vector
         var moveStep = mul * this.speed * this.moveSpeed;
-        
+
         // Add rotation if player is rotating (player.dir != 0)
         this.rotDeg += mul * this.dir * this.rotSpeed;
         this.rotDeg %= 360;
@@ -93,7 +93,7 @@ App.define('Player', 'engine', (function(fn) {
      * @return void
      */
     fn.prototype.setControls = function() {
-        var constrols = new App.engine.Controls();
+        var controls = new App.engine.Controls();
 
         controls.keyboardMap(this);
     };

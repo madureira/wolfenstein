@@ -21,7 +21,8 @@ App.Properties = {
 
     templateEngine: App.template,
     texturesPath: 'src/resources/textures/',
-    fps: 60,
+    fps: 30,
+    playerSpeed: 0.20,
     raycastingColor: 'rgba(0,100,0,0.3)',
 
     screenWidth: 320,

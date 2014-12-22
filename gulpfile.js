@@ -39,7 +39,8 @@ var templates = [
 var jsVendors = [
     './src/javascript/main/vendors/jquery.min.js',
     './src/javascript/main/vendors/bootstrap.min.js',
-    './src/javascript/main/vendors/handlebars.runtime.js'
+    './src/javascript/main/vendors/handlebars.runtime.js',
+    './src/javascript/main/vendors/excanvas.js'
 ];
 
 

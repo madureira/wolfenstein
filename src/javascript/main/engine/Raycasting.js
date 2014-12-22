@@ -272,7 +272,7 @@ App.define('Raycasting', 'engine', (function(fn) {
             strip.oldStyles.left = styleLeft;
         }
 
-        var styleClip = "rect(" + imgTop + "px, " + (texX + screen.stripWidth)  + "px, " + (imgTop + height) + "px, " + texX + "px)";
+        var styleClip = 'rect(' + imgTop + 'px, ' + (texX + screen.stripWidth)  + 'px, ' + (imgTop + height) + 'px, ' + texX + 'px)';
         if (strip.oldStyles.clip !== styleClip) {
             strip.style.clip = styleClip;
             strip.oldStyles.clip = styleClip;

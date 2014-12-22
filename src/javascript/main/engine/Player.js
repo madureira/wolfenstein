@@ -9,11 +9,11 @@
 App.define('Player', 'engine', (function(fn) {
     'use strict';
 
-    fn = function() {
+    fn = function(playerX, playerY) {
         console.log('[Player] Creating a Player');
 
-        this.x = App.Properties.playerInitialX;
-        this.y = App.Properties.playerInitialY;
+        this.x = playerX;
+        this.y = playerY;
 
         // The direction that the player is turning,
         // either -1 for left or 1 for right
@@ -100,7 +100,7 @@ App.define('Player', 'engine', (function(fn) {
             return true;
 
         // return true if the map block is not 0, ie. if there is a blocking wall.
-        return (miniMap.map[Math.floor(playerY)][Math.floor(playerX)] !== 0); 
+        return (miniMap.map.map[Math.floor(playerY)][Math.floor(playerX)] !== 0); 
     }
 
     return fn;

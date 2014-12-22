@@ -23,10 +23,6 @@ App.Properties = {
     texturesPath: 'src/resources/textures/',
     fps: 40,
 
-    // Initial position of the player
-    playerInitialX: 10.5,
-    playerInitialY: 6.5,
-
     // How far (in map units) does the player move each step/update
     playerSpeed: 0.10,
 

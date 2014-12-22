@@ -43,7 +43,7 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
         screen.init();
 
         var gameCycle = new GameCycle();
-        var player = new Player();
+        var player = new Player(levelMap.playerX, levelMap.playerY);
 
         var raycasting = new Raycasting(player, miniMap, screen);
 

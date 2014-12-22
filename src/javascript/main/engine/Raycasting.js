@@ -103,13 +103,13 @@ App.define('Raycasting', 'engine', (function(fn) {
             wallY = Math.floor(y);
 
             // is this point inside a wall block?
-            if (miniMap.map[wallY][wallX] > 0) {
+            if (miniMap.map.map[wallY][wallX] > 0) {
 
                 distX = x - player.x;
                 distY = y - player.y;
                 dist = distX * distX + distY * distY;   // the distance from the player to this point, squared.
 
-                wallType = miniMap.map[wallY][wallX]; // we'll remember the type of wall we hit for later
+                wallType = miniMap.map.map[wallY][wallX]; // we'll remember the type of wall we hit for later
                 textureX = y % 1;   // where exactly are we on the wall? textureX is the x coordinate on the texture that we'll use when texturing the wall.
                 if (!right) textureX = 1 - textureX; // if we're looking to the left side of the map, the texture should be reversed
 
@@ -140,7 +140,7 @@ App.define('Raycasting', 'engine', (function(fn) {
         while (x >= 0 && x < miniMap.mapWidth && y >= 0 && y < miniMap.mapHeight) {
             wallY = Math.floor(y + (up ? -1 : 0));
             wallX = Math.floor(x);
-            if (miniMap.map[wallY][wallX] > 0) {
+            if (miniMap.map.map[wallY][wallX] > 0) {
                 distX = x - player.x;
                 distY = y - player.y;
                 var blockDist = distX*distX + distY*distY;
@@ -149,7 +149,7 @@ App.define('Raycasting', 'engine', (function(fn) {
                     xHit = x;
                     yHit = y;
 
-                    wallType = miniMap.map[wallY][wallX];
+                    wallType = miniMap.map.map[wallY][wallX];
                     textureX = x % 1;
                     if (up) textureX = 1 - textureX;
                 }

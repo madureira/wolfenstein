@@ -33,8 +33,8 @@ App.define('MiniMap', 'engine', (function(fn) {
      * @return void
      */
     fn.prototype.init = function() {
-        mapWidth = this.map[0].length;
-        mapHeight = this.map.length;
+        mapWidth = this.map.map[0].length;
+        mapHeight = this.map.map.length;
         this.mapWidth = mapWidth;
         this.mapHeight = mapHeight;
         this.miniMapScale = MINI_MAP_SCALE;
@@ -96,7 +96,7 @@ App.define('MiniMap', 'engine', (function(fn) {
         var ctx = miniMap.getContext('2d');
         for (var y=0; y < mapHeight; y++) {
             for (var x=0; x < mapWidth; x++) {
-                var wall = map[y][x];
+                var wall = map.map[y][x];
 
                 // If there is a wall block at this (x,y)…
                 if (wall > 0) {

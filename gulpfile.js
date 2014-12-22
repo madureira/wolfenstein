@@ -12,7 +12,7 @@ var handlebars = require('gulp-handlebars');
 var defineModule = require('gulp-define-module');
 var header = require('gulp-header');
 
-var FINAL_NAME = 'doom';
+var FINAL_NAME = 'wolfenstein';
 
 // js package sources
 var jsPackages = [

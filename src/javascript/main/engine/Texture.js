@@ -21,7 +21,7 @@ App.define('Texture', 'engine', (function(fn) {
      */
     fn.prototype.get = function(name) {
         var img = new Image();
-        img.src = texturesPath + name + '.png';
+        img.src = texturesPath + name;
         img.style.position = 'absolute';
         img.style.left = '0px';
 

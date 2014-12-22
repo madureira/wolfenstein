@@ -57,11 +57,11 @@ App.define('GameCycle', 'engine', (function(fn) {
                 cycleDelay = Math.max(1, cycleDelay - (timeDelta - cycleDelay));
             }
 
-            lastGameCycleTime = now;
-
             setTimeout(function() {
                 self.init();
             }, cycleDelay);
+
+            lastGameCycleTime = now;
         };
 
 
@@ -82,11 +82,11 @@ App.define('GameCycle', 'engine', (function(fn) {
 
             lastRenderCycleTime = now;
 
-            self.fpsDebug.update(1000 / timeDelta);
-
             setTimeout(function() {
                 self.renderCycle();
             }, cycleDelay);
+
+            self.fpsDebug.update(1000 / timeDelta);
         };
 
         // expose private method as public after set the player.

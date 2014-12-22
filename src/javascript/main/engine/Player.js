@@ -100,7 +100,7 @@ App.define('Player', 'engine', (function(fn) {
             return true;
 
         // return true if the map block is not 0, ie. if there is a blocking wall.
-        return (miniMap.map.map[Math.floor(playerY)][Math.floor(playerX)] !== 0); 
+        return (miniMap.level.map[Math.floor(playerY)][Math.floor(playerX)] !== 0);
     }
 
     return fn;

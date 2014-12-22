@@ -1,14 +1,14 @@
 {
-    "name"              : "doom",
+    "name"              : "wolfenstein",
     "version"           : "1.0.0",
-    "description"       : "A simple doom implementation",
-    "keywords"          : [ "Doom", "javascript", "nodejs" ],
-    "homepage"          : "https://github.com/madureira/doom",
+    "description"       : "The Wolfenstein 3D implemented in javascript.",
+    "keywords"          : [ "Wolfenstein", "javascript", "nodejs" ],
+    "homepage"          : "https://github.com/madureira/wolfenstein",
 
     "author"            : "Rafael Madureira dos Santos",
 
-    "bugs"              : { "url": "https://github.com/madureira/doom/issues" },
-    "repository"        : { "type": "git", "url": "https://github.com/madureira/doom.git" },
+    "bugs"              : { "url": "https://github.com/madureira/wolfenstein/issues" },
+    "repository"        : { "type": "git", "url": "https://github.com/madureira/wolfenstein.git" },
     "license"           : "BSD",
 
     "main"              : "index.html",

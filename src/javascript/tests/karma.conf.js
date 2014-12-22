@@ -4,9 +4,9 @@ module.exports = function(config) {
         browsers: ['PhantomJS'],
         frameworks: ['jasmine'],
         files: [
-            "build/doom.vendors.min.js",
-            "build/doom.templates.js",
-            "build/doom.js",
+            "build/wolfenstein.vendors.min.js",
+            "build/wolfenstein.templates.js",
+            "build/wolfenstein.js",
             "src/javascript/tests/**/*.test.js"
         ],
         colors: true

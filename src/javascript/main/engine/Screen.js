@@ -24,21 +24,20 @@ App.define('Screen', 'engine', (function(fn) {
         var screen = this.$selector.byId('screen');
 
         for (var i=0; i < this.screenWidth; i += this.stripWidth) {
-            var strip = this.$selector.byTag('div');
+            var strip = this.$selector.byTag('img');
 
             strip.style.position = 'absolute';
-            strip.style.left = i + 'px';
-            strip.style.width = this.stripWidth + 'px';
+            strip.style.left = '0px';
             strip.style.height = '0px';
-            strip.style.overflow = 'hidden';
 
-            strip.style.backgroundColor = 'magenta';
-
-            var texture = new App.engine.Texture();
-            var img = texture.get('walls');
-
-            strip.appendChild(img);
-            strip.img = img;    // assign the image to a property on the strip element so we have easy access to the image later
+            strip.oldStyles = {
+                left: 0,
+                top: 0,
+                width: 0,
+                height: 0,
+                clip: '',
+                src: ''
+            };
 
             this.screenStrips.push(strip);
             screen.appendChild(strip);

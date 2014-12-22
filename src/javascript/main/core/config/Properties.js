@@ -21,6 +21,7 @@ App.Properties = {
 
     templateEngine: App.template,
     texturesPath: 'src/resources/textures/',
+    spritesPath: 'src/resources/sprites/',
     fps: 40,
 
     // How far (in map units) does the player move each step/update

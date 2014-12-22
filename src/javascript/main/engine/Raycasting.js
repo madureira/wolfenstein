@@ -11,8 +11,7 @@ App.define('Raycasting', 'engine', (function(fn) {
 
     var fov         = 60 * Math.PI / 180,
         fovHalf     = fov / 2,
-        twoPI       = Math.PI * 2,
-        numTextures = 0;
+        twoPI       = Math.PI * 2;
 
     /**
      * Contructor
@@ -28,9 +27,7 @@ App.define('Raycasting', 'engine', (function(fn) {
         this.screen = screen;
 
         this.numRays     = Math.ceil(this.screen.screenWidth / this.screen.stripWidth);
-        this.viewDist    = (this.screen.screenWidth/2) / Math.tan((fov / 2));
-        var texture = new App.engine.Texture();
-        numTextures = texture.getNumberOfTextures();
+        this.viewDist    = (this.screen.screenWidth / 2) / Math.tan((fov / 2));
     };
 
     /**
@@ -45,7 +42,7 @@ App.define('Raycasting', 'engine', (function(fn) {
 
         for (var i=0; i < this.numRays; i++) {
             // where on the screen does ray go through?
-            var rayScreenPos = (-this.numRays/2 + i) * this.screen.stripWidth;
+            var rayScreenPos = (-this.numRays / 2 + i) * this.screen.stripWidth;
 
             // the distance from the viewer to the point on the screen, simply Pythagoras.
             var rayViewDist = Math.sqrt(rayScreenPos * rayScreenPos + this.viewDist * this.viewDist);
@@ -68,6 +65,7 @@ App.define('Raycasting', 'engine', (function(fn) {
         // moving right/left? up/down? Determined by which quadrant the angle is in.
         var right = (rayAngle > twoPI * 0.75 || rayAngle < twoPI * 0.25);
         var up = (rayAngle < 0 || rayAngle > Math.PI);
+
         var wallType = 0;
 
         // only do these once
@@ -77,10 +75,14 @@ App.define('Raycasting', 'engine', (function(fn) {
         var dist = 0;   // the distance to the block we hit
         var xHit = 0;   // the x and y coord of where the ray hit the block
         var yHit = 0;
+        var xWallHit = 0;
+        var yWallHit = 0;
 
         var textureX;   // the x-coord on the texture of the block, ie. what part of the texture are we going to render
         var wallX;  // the (x,y) map coords of the block
         var wallY;
+
+        var wallIsShaded = false;
 
         var wallIsHorizontal = false;
 
@@ -95,26 +97,31 @@ App.define('Raycasting', 'engine', (function(fn) {
 
         var x = right ? Math.ceil(player.x) : Math.floor(player.x); // starting horizontal position, at one of the edges of the current map block
         var y = player.y + (x - player.x) * slope;          // starting vertical position. We add the small horizontal step we just made, multiplied by the slope.
-        var distX = 0, distY = 0;
-
+        var distX = 0;
+        var distY = 0;
 
         while (x >= 0 && x < miniMap.mapWidth && y >= 0 && y < miniMap.mapHeight) {
             wallX = Math.floor(x + (right ? 0 : -1));
             wallY = Math.floor(y);
 
             // is this point inside a wall block?
-            if (miniMap.map.map[wallY][wallX] > 0) {
+            if (miniMap.level.map[wallY][wallX] > 0) {
 
                 distX = x - player.x;
                 distY = y - player.y;
-                dist = distX * distX + distY * distY;   // the distance from the player to this point, squared.
+                dist = (distX * distX) + (distY * distY);   // the distance from the player to this point, squared.
 
-                wallType = miniMap.map.map[wallY][wallX]; // we'll remember the type of wall we hit for later
+                wallType = miniMap.level.map[wallY][wallX]; // we'll remember the type of wall we hit for later
                 textureX = y % 1;   // where exactly are we on the wall? textureX is the x coordinate on the texture that we'll use when texturing the wall.
                 if (!right) textureX = 1 - textureX; // if we're looking to the left side of the map, the texture should be reversed
 
                 xHit = x;   // save the coordinates of the hit. We only really use these to draw the rays on minimap.
                 yHit = y;
+                xWallHit = wallX;
+                yWallHit = wallY;
+
+                // make horizontal walls shaded
+                wallIsShaded = true;
 
                 wallIsHorizontal = true;
 
@@ -125,13 +132,12 @@ App.define('Raycasting', 'engine', (function(fn) {
         }
 
 
-
         // now check against horizontal lines. It's basically the same, just "turned around".
         // the only difference here is that once we hit a map block, 
         // we check if there we also found one in the earlier, vertical run. We'll know that if dist != 0.
         // If so, we only register this hit if this distance is smaller.
 
-        slope = angleCos / angleSin;
+        slope = angleCos / angleSin;    // the slope of the straight line made by the ray
         var dYHor = up ? -1 : 1;
         var dXHor = dYHor * slope;
         y = up ? Math.floor(player.y) : Math.ceil(player.y);
@@ -140,18 +146,24 @@ App.define('Raycasting', 'engine', (function(fn) {
         while (x >= 0 && x < miniMap.mapWidth && y >= 0 && y < miniMap.mapHeight) {
             wallY = Math.floor(y + (up ? -1 : 0));
             wallX = Math.floor(x);
-            if (miniMap.map.map[wallY][wallX] > 0) {
+
+            if (miniMap.level.map[wallY][wallX] > 0) {
                 distX = x - player.x;
                 distY = y - player.y;
-                var blockDist = distX*distX + distY*distY;
+                var blockDist = (distX * distX) + (distY * distY);
+
                 if (!dist || blockDist < dist) {
                     dist = blockDist;
                     xHit = x;
                     yHit = y;
+                    xWallHit = wallX;
+                    yWallHit = wallY;
 
-                    wallType = miniMap.map.map[wallY][wallX];
+                    wallType = miniMap.level.map[wallY][wallX];
                     textureX = x % 1;
                     if (up) textureX = 1 - textureX;
+
+                    wallIsShaded = false;
                 }
                 break;
             }
@@ -161,7 +173,7 @@ App.define('Raycasting', 'engine', (function(fn) {
 
         if (dist) {
             _drawRay(xHit, yHit, miniMap, player);
-            _drawScreen(screen, stripIdx, dist, player, viewDist, rayAngle, wallType, textureX);
+            _drawScreen(screen, stripIdx, dist, player, viewDist, rayAngle, wallType, textureX, miniMap.level, wallIsShaded, xWallHit, yWallHit);
         }
 
     }
@@ -181,7 +193,7 @@ App.define('Raycasting', 'engine', (function(fn) {
         objectCtx.stroke();
     }
 
-    function _drawScreen(screen, stripIdx, dist, player, viewDist, rayAngle, wallType, textureX) {
+    function _drawScreen(screen, stripIdx, dist, player, viewDist, rayAngle, wallType, textureX, level, wallIsShaded, xWallHit, yWallHit) {
         var strip = screen.screenStrips[stripIdx];
 
         dist = Math.sqrt(dist);
@@ -202,19 +214,75 @@ App.define('Raycasting', 'engine', (function(fn) {
         //it half way down the screen and then half the wall height back up.
         var top = Math.round((screen.screenHeight - height) / 2);
 
-        strip.style.height = height+"px";
-        strip.style.top = top+"px";
+        var imgTop = 0;
 
-        strip.img.style.height = Math.floor(height * numTextures) + "px";
-        strip.img.style.width = Math.floor(width*2) +"px";
-        strip.img.style.top = -Math.floor(height * (wallType-1)) + "px";
+        var styleHeight;
 
-        var texX = Math.round(textureX*width);
+        var mapTextures = level.mapTextures;
 
-        if (texX > width - screen.stripWidth)
+        var styleSrc = App.Properties.texturesPath;
+
+        var texturesLength = mapTextures.length;
+
+        for (var i=0; texturesLength > i; i++) {
+            var current = mapTextures[i];
+
+            if (current.id === (wallType)) {
+                if (current.texture) {
+                    styleSrc = styleSrc + current.texture;
+                    break;
+                }
+            }
+        }
+
+        if (strip.oldStyles.src !== styleSrc) {
+            strip.src = styleSrc;
+            strip.oldStyles.src = styleSrc;
+        }
+
+        styleHeight = height;
+
+        if (strip.oldStyles.height !== styleHeight) {
+            strip.style.height = styleHeight + "px";
+            strip.oldStyles.height = styleHeight;
+        }
+
+        var texX = Math.round(textureX * width);
+        if (texX > width - screen.stripWidth) {
             texX = width - screen.stripWidth;
+        }
 
-        strip.img.style.left = -texX + "px";
+        texX += (wallIsShaded ? width : 0);
+
+        var styleWidth = Math.floor(width * 2);
+        if (strip.oldStyles.width != styleWidth) {
+            strip.style.width = styleWidth +"px";
+            strip.oldStyles.width = styleWidth;
+        }
+
+        var styleTop = top - imgTop;
+        if (strip.oldStyles.top !== styleTop) {
+            strip.style.top = styleTop + "px";
+            strip.oldStyles.top = styleTop;
+        }
+
+        var styleLeft = (stripIdx * screen.stripWidth) - texX;
+        if (strip.oldStyles.left !== styleLeft) {
+            strip.style.left = styleLeft + "px";
+            strip.oldStyles.left = styleLeft;
+        }
+
+        var styleClip = "rect(" + imgTop + "px, " + (texX + screen.stripWidth)  + "px, " + (imgTop + height) + "px, " + texX + "px)";
+        if (strip.oldStyles.clip !== styleClip) {
+            strip.style.clip = styleClip;
+            strip.oldStyles.clip = styleClip;
+        }
+
+        var dwx = xWallHit - player.x;
+        var dwy = yWallHit - player.y;
+
+        var wallDist = (dwx * dwx) + (dwy * dwy);
+        strip.style.zIndex = -Math.floor(wallDist * 1000);
     }
 
     return fn;

@@ -50,19 +50,23 @@ App.define('Controls', 'engine', (function(fn) {
             switch (e.keyCode) {
                 case self.forwardKey[0]:
                 case self.forwardKey[1]:
-                    player.speed = 1; break;
+                    player.speed = 1;
+                    break;
 
                 case self.backwardKey[0]:
                 case self.backwardKey[1]:
-                    player.speed = -1; break;
+                    player.speed = -1;
+                    break;
 
                 case self.leftKey[0]:
                 case self.leftKey[1]:
-                    player.dir = -1; break;
+                    player.dir = -1;
+                    break;
 
                 case self.rightKey[0]:
                 case self.rightKey[1]:
-                    player.dir = 1; break;
+                    player.dir = 1;
+                    break;
 
                 case self.enableMap:
                     if (MAP_ENABLED) {
@@ -93,13 +97,15 @@ App.define('Controls', 'engine', (function(fn) {
                 case self.forwardKey[1]:
                 case self.backwardKey[0]:
                 case self.backwardKey[1]:
-                    player.speed = 0; break;
+                    player.speed = 0;
+                    break;
 
                 case self.leftKey[0]:
                 case self.leftKey[1]:
                 case self.rightKey[0]:
                 case self.rightKey[1]:
-                    player.dir = 0; break;
+                    player.dir = 0;
+                    break;
             }
         };
     };

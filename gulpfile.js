@@ -11,6 +11,9 @@ var stylish = require('jshint-stylish');
 var handlebars = require('gulp-handlebars');
 var defineModule = require('gulp-define-module');
 var header = require('gulp-header');
+var NwBuilder = require('node-webkit-builder');
+
+
 
 var FINAL_NAME = 'wolfenstein';
 
@@ -54,6 +57,26 @@ var cssVendors = [
     './src/stylesheet/main/vendors/reset.css',
     './src/stylesheet/main/vendors/bootstrap.min.css'
 ];
+
+
+gulp.task('build', function () {
+    var nw = new NwBuilder({
+        version: '0.11.0',
+        files: ['./package.json', './index.html', './build/**/*', './src/resources/**/*'],
+        platforms: ['win64', 'linux64'],
+        buildDir: './bin'
+    });
+
+    // Log stuff you want
+    nw.on('log', function (msg) {
+        gutil.log('node-webkit-builder', msg);
+    });
+
+    // Build returns a promise, return it so the task isn't called in parallel
+    return nw.build().catch(function (err) {
+        gutil.log('node-webkit-builder', err);
+    });
+});
 
 
 // concat all js files in order

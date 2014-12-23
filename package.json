@@ -29,7 +29,8 @@
         "jshint-stylish"            : "0.4.0",
         "jasmine-node-karma"        : "~1.6.1",
         "karma-phantomjs-launcher"  : "0.1.4",
-        "karma-jasmine"             : "0.1.5"
+        "karma-jasmine"             : "0.1.5",
+        "node-webkit-builder"       : "1.0.4"
     },
 
     "window": {

@@ -76,7 +76,6 @@ App.define('Player', 'engine', (function(fn) {
         var newY = this.y + Math.sin(this.rot) * moveStep;
 
         var pos = this.collision.checkCollision(this.x, this.y, newX, newY, 0.35, miniMap);
-        //var pos = { x: newX, y: newY };
 
         // Set new position
         this.x = pos.x;

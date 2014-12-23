@@ -47,9 +47,9 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
 
         var raycasting = new Raycasting(player, miniMap, screen);
 
-        var cycle = gameCycle.setElements(player, miniMap, screen, raycasting);
-        cycle.init();
-        cycle.renderCycle();
+        gameCycle.setElements(player, miniMap, screen, raycasting);
+        gameCycle.init();
+        gameCycle.renderCycle();
     }
 
     return fn;

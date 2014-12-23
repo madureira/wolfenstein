@@ -32,8 +32,8 @@ App.Properties = {
 
     raycastingColor: 'rgba(0,100,0,0.3)',
 
-    screenWidth: 1280,
-    screenHeight: 720,
+    screenWidth: 720,
+    screenHeight: 480,
     stripWidth: 2,
 
     miniMapElementId: 'minimap',

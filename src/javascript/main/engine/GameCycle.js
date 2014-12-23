@@ -36,63 +36,57 @@ App.define('GameCycle', 'engine', (function(fn) {
         this.raycasting = raycasting;
         this.screen = screen;
         this.fpsDebug = new App.engine.FPSDebug();
-
-        App.engine.GameCycle.prototype.init = function() {
-            var now = new Date().getTime();
-
-            // Time since last game logic
-            var timeDelta = now - lastGameCycleTime;
-
-            var self = this;
-            this.player = self.player;
-
-            self.player.move(self.miniMap, timeDelta, GAME_CYCLE_DELAY);
-
-            var cycleDelay = GAME_CYCLE_DELAY;
-
-            // The timer will likely not run that fast
-            // due to the rendering cycle hogging the CPU
-            // so figure out how much time was lost since last cycle
-            if (timeDelta > cycleDelay) {
-                cycleDelay = Math.max(1, cycleDelay - (timeDelta - cycleDelay));
-            }
-
-            setTimeout(function() {
-                self.init();
-            }, cycleDelay);
-
-            lastGameCycleTime = now;
-        };
-
-
-        App.engine.GameCycle.prototype.renderCycle = function() {
-            var self = this;
-
-            this.miniMap.update(this.player);
-            this.raycasting.castRays();
-
-            // time since last rendering
-            var now = new Date().getTime();
-            var timeDelta = now - lastRenderCycleTime;
-            var cycleDelay = GAME_CYCLE_DELAY;
-
-            if (timeDelta > cycleDelay) {
-                cycleDelay = Math.max(1, cycleDelay - (timeDelta - cycleDelay));
-            }
-
-            lastRenderCycleTime = now;
-
-            setTimeout(function() {
-                self.renderCycle();
-            }, cycleDelay);
-
-            self.fpsDebug.update(1000 / timeDelta);
-        };
-
-        // expose private method as public after set the player.
-        return this;
     };
 
+    fn.prototype.init = function() {
+        var now = new Date().getTime();
+
+        // Time since last game logic
+        var timeDelta = now - lastGameCycleTime;
+
+        this.player.move(this.miniMap, timeDelta, GAME_CYCLE_DELAY);
+
+        var cycleDelay = GAME_CYCLE_DELAY;
+
+        // The timer will likely not run that fast
+        // due to the rendering cycle hogging the CPU
+        // so figure out how much time was lost since last cycle
+        if (timeDelta > cycleDelay) {
+            cycleDelay = Math.max(1, cycleDelay - (timeDelta - cycleDelay));
+        }
+
+        var self = this;
+
+        setTimeout(function() {
+            self.init();
+        }, cycleDelay);
+
+        lastGameCycleTime = now;
+    };
+
+    fn.prototype.renderCycle = function() {
+        this.miniMap.update(this.player);
+        this.raycasting.castRays();
+
+        // time since last rendering
+        var now = new Date().getTime();
+        var timeDelta = now - lastRenderCycleTime;
+        var cycleDelay = GAME_CYCLE_DELAY;
+
+        if (timeDelta > cycleDelay) {
+            cycleDelay = Math.max(1, cycleDelay - (timeDelta - cycleDelay));
+        }
+
+        lastRenderCycleTime = now;
+
+        var self = this;
+
+        setTimeout(function() {
+            self.renderCycle();
+        }, cycleDelay);
+
+        this.fpsDebug.update(1000 / timeDelta);
+    };
 
     return fn;
 

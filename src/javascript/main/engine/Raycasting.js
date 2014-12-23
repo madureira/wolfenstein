@@ -235,10 +235,8 @@ App.define('Raycasting', 'engine', (function(fn) {
             }
         }
 
-        if (strip.oldStyles.src !== styleSrc) {
-            strip.src = styleSrc;
-            strip.oldStyles.src = styleSrc;
-        }
+        strip.src = styleSrc;
+        strip.oldStyles.src = styleSrc;
 
         styleHeight = height;
 

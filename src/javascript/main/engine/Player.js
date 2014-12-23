@@ -34,6 +34,8 @@ App.define('Player', 'engine', (function(fn) {
         this.rotSpeed = App.Properties.playerRotateSpeed;
 
         this.setControls();
+
+        this.collision = new App.engine.Collision();
     };
 
     /**
@@ -73,14 +75,12 @@ App.define('Player', 'engine', (function(fn) {
         var newX = this.x + Math.cos(this.rot) * moveStep;
         var newY = this.y + Math.sin(this.rot) * moveStep;
 
-        // Detect collision
-        if (_isColliding(newX, newY, miniMap)) {
-            return;
-        }
+        var pos = this.collision.checkCollision(this.x, this.y, newX, newY, 0.35, miniMap);
+        //var pos = { x: newX, y: newY };
 
         // Set new position
-        this.x = newX;
-        this.y = newY;
+        this.x = pos.x;
+        this.y = pos.y;
     };
 
     /**
@@ -93,15 +93,6 @@ App.define('Player', 'engine', (function(fn) {
 
         controls.keyboardMap(this);
     };
-
-    function _isColliding(playerX, playerY, miniMap) {
-        //first make sure that we cannot move outside the boundaries of the level
-        if (playerY < 0 || playerY > miniMap.mapHeight || playerX < 0 || playerX > miniMap.mapWidth)
-            return true;
-
-        // return true if the map block is not 0, ie. if there is a blocking wall.
-        return (miniMap.level.map[Math.floor(playerY)][Math.floor(playerX)] !== 0);
-    }
 
     return fn;
 

@@ -41,6 +41,7 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
 
         var screen = new Screen($);
         screen.init();
+        screen.addObjects(levelMap.map, levelMap.objects);
 
         var gameCycle = new GameCycle();
         var player = new Player(levelMap.playerX, levelMap.playerY);

@@ -104,6 +104,11 @@ App.define('Raycasting', 'engine', (function(fn) {
             wallX = Math.floor(x + (right ? 0 : -1));
             wallY = Math.floor(y);
 
+            if (screen.spriteMap[wallY][wallX] && !screen.spriteMap[wallY][wallX].visible) {
+                screen.spriteMap[wallY][wallX].visible = true;
+                screen.visibleSprites.push(screen.spriteMap[wallY][wallX]);
+            }
+
             // is this point inside a wall block?
             if (miniMap.level.map[wallY][wallX] > 0) {
 
@@ -146,6 +151,11 @@ App.define('Raycasting', 'engine', (function(fn) {
         while (x >= 0 && x < miniMap.mapWidth && y >= 0 && y < miniMap.mapHeight) {
             wallY = Math.floor(y + (up ? -1 : 0));
             wallX = Math.floor(x);
+
+            if (screen.spriteMap[wallY][wallX] && !screen.spriteMap[wallY][wallX].visible) {
+                screen.spriteMap[wallY][wallX].visible = true;
+                screen.visibleSprites.push(screen.spriteMap[wallY][wallX]);
+            }
 
             if (miniMap.level.map[wallY][wallX] > 0) {
                 distX = x - player.x;

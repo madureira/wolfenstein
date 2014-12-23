@@ -44,7 +44,7 @@ App.define('GameCycle', 'engine', (function(fn) {
         // Time since last game logic
         var timeDelta = now - lastGameCycleTime;
 
-        this.player.move(this.miniMap, timeDelta, GAME_CYCLE_DELAY);
+        this.player.move(this.miniMap, this.screen, timeDelta, GAME_CYCLE_DELAY);
 
         var cycleDelay = GAME_CYCLE_DELAY;
 
@@ -66,7 +66,9 @@ App.define('GameCycle', 'engine', (function(fn) {
 
     fn.prototype.renderCycle = function() {
         this.miniMap.update(this.player);
+        this.screen.clearObjects();
         this.raycasting.castRays();
+        this.screen.renderObjects(this.player, this.raycasting.viewDist);
 
         // time since last rendering
         var now = new Date().getTime();

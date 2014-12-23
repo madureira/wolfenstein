@@ -47,7 +47,7 @@ App.define('Player', 'engine', (function(fn) {
      *
      * @return void;
      */
-    fn.prototype.move = function(miniMap, timeDelta, gameCycleDelay) {
+    fn.prototype.move = function(miniMap, screen, timeDelta, gameCycleDelay) {
         // Time timeDelta has passed since we moved last time
         // We should have moved after time gameCycleDelay,
         // so calculate how much we should multiply our
@@ -75,7 +75,7 @@ App.define('Player', 'engine', (function(fn) {
         var newX = this.x + Math.cos(this.rot) * moveStep;
         var newY = this.y + Math.sin(this.rot) * moveStep;
 
-        var pos = this.collision.checkCollision(this.x, this.y, newX, newY, 0.35, miniMap);
+        var pos = this.collision.checkCollision(this.x, this.y, newX, newY, 0.35, miniMap, screen);
 
         // Set new position
         this.x = pos.x;

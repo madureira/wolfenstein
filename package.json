@@ -33,11 +33,17 @@
     },
 
     "window": {
-        "width": 1280,
-        "height": 720,
+        "icon": "src/resources/icons/icon.png",
+        "width": 720,
+        "height": 480,
         "position": "center",
-        "frame": false,
-        "toolbar": false
+        "frame": true,
+        "toolbar": false,
+        "min_width": 720,
+        "min_height": 180,
+        "max_width": 720,
+        "max_height": 480,
+        "resizable": false
     },
 
     "engines"         : { "node": ">= 0.10.28" }

@@ -124,8 +124,9 @@ gulp.task('buildTemplates', function() {
                 return { templateName: name };
             }
         }))
-        .pipe(concat(FINAL_NAME + '.templates.js'))
+        .pipe(concat(FINAL_NAME + '.templates.min.js'))
         .pipe(header('var App = App || {}; App.template = App.template || {};'))
+        .pipe(uglify())
         .pipe(gulp.dest('./build'))
         .pipe(filesize())
         .on('error', gutil.log);

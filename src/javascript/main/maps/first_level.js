@@ -77,6 +77,18 @@ App.maps.firstLevel = {
             positionX: 15,
             positionY: 18,
             block : true
+        },
+        {
+            img : 'plantgreen.png',
+            positionX: 10,
+            positionY: 11,
+            block : true
+        },
+        {
+            img : 'plantgreen.png',
+            positionX: 15,
+            positionY: 11,
+            block : true
         }
     ]
 

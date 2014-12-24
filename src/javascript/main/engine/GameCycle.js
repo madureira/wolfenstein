@@ -38,6 +38,11 @@ App.define('GameCycle', 'engine', (function(fn) {
         this.fpsDebug = new App.engine.FPSDebug();
     };
 
+    /**
+     * Init the game cycle and call itself recursively.
+     *
+     * @return void
+     */
     fn.prototype.init = function() {
         var now = new Date().getTime();
 
@@ -64,11 +69,16 @@ App.define('GameCycle', 'engine', (function(fn) {
         lastGameCycleTime = now;
     };
 
+    /**
+     * Init the render cycle and call itself recursively.
+     *
+     * @return void
+     */
     fn.prototype.renderCycle = function() {
         this.miniMap.update(this.player);
-        this.screen.clearObjects();
+        this.screen.sprites.clearObjects();
         this.raycasting.castRays();
-        this.screen.renderObjects(this.player, this.raycasting.viewDist);
+        this.screen.sprites.renderObjects(this.player, this.raycasting.viewDist, this.screen.screenWidth, this.screen.screenHeight);
 
         // time since last rendering
         var now = new Date().getTime();

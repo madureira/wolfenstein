@@ -10,6 +10,14 @@ App.define('Shortcut', 'core/config', (function(fn) {
         _addDefaultShortcuts();
     };
 
+    /**
+     * Add a shortcut to instantiate objects.
+     *
+     * @param String node
+     * @param Object item
+     *
+     * @return void
+     */
     fn.prototype.addShortcut = function(node, item) {
         App[node] = item;
     };

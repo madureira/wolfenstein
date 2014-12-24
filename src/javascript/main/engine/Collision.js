@@ -9,6 +9,19 @@
 App.define('Collision', 'engine', (function(fn) {
     'use strict';
 
+    /**
+     * Detect collision between the player and Wall or Sprites.
+     *
+     * @param Float fromX
+     * @param Float fromY
+     * @param Float toX
+     * @param Float toY
+     * @param Float radius
+     * @param App.engine.MiniMap miniMap
+     * @param App.engine.Screen screen
+     *
+     * @return Boolean
+     */
     fn.prototype.checkCollision = function(fromX, fromY, toX, toY, radius, miniMap, screen) {
         var pos = {
             x : fromX,
@@ -113,7 +126,7 @@ App.define('Collision', 'engine', (function(fn) {
         if (miniMap.level.map[iy][ix] !== 0)
             return true;
 
-        if (screen.spriteMap[iy][ix] && screen.spriteMap[iy][ix].block)
+        if (screen.sprites.spriteMap[iy][ix] && screen.sprites.spriteMap[iy][ix].block)
             return true;
 
         return false;

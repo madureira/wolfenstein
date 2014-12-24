@@ -5,9 +5,8 @@ App.maps = App.maps || {};
 
 App.Properties = {
 
-    //container: '#stage',
     container: 'stage',
-    //selectorEngine: jQuery,
+
     selectorEngine: (function() {
         return {
             byId: function(id) {
@@ -22,13 +21,11 @@ App.Properties = {
     templateEngine: App.template,
     texturesPath: 'src/resources/textures/',
     spritesPath: 'src/resources/sprites/',
-    fps: 40,
+    fps: 30,
 
-    // How far (in map units) does the player move each step/update
-    playerSpeed: 0.10,
+    playerSpeed: 0.18,
 
-    // How much does the player rotate each step/update (in radians)
-    playerRotateSpeed: 2,
+    playerRotateSpeed: 3,
 
     raycastingColor: 'rgba(0,100,0,0.3)',
 
@@ -39,7 +36,6 @@ App.Properties = {
     miniMapElementId: 'minimap',
     miniMapObjectElementId: 'minimapobjects',
     miniMapScale: 4,
-    //miniMapBlocksColor: 'rgb(200,200,200)',
     miniMapBlocksColor: '#000',
     miniMapDebugMode: false
 

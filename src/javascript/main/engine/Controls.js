@@ -12,7 +12,13 @@ App.define('Controls', 'engine', (function(fn) {
     var MAP_ENABLED = false;
     var FPS_DISPLAY_ENABLED = false;
 
+    /**
+     * Sets default attirbutes.
+     *
+     * @return void
+     */
     fn = function() {
+        console.log('[Controls] Configured');
         // up, W
         this.forwardKey = [38, 87];
 
@@ -36,6 +42,8 @@ App.define('Controls', 'engine', (function(fn) {
      * Defines the keyboard map.
      *
      * @param App.engine.Player player
+     *
+     * @return void
      */
     fn.prototype.keyboardMap = function(player) {
         var self = this;

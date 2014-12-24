@@ -9,6 +9,9 @@
 App.define('Player', 'engine', (function(fn) {
     'use strict';
 
+    /**
+     * Sets default attributes
+     */
     fn = function(playerX, playerY) {
         console.log('[Player] Creating a Player');
 

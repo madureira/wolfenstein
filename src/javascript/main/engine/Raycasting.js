@@ -33,7 +33,6 @@ App.define('Raycasting', 'engine', (function(fn) {
     /**
      * Launches the rays.
      *
-     *
      * @return void
      */
     fn.prototype.castRays = function() {
@@ -104,9 +103,9 @@ App.define('Raycasting', 'engine', (function(fn) {
             wallX = Math.floor(x + (right ? 0 : -1));
             wallY = Math.floor(y);
 
-            if (screen.spriteMap[wallY][wallX] && !screen.spriteMap[wallY][wallX].visible) {
-                screen.spriteMap[wallY][wallX].visible = true;
-                screen.visibleSprites.push(screen.spriteMap[wallY][wallX]);
+            if (screen.sprites.spriteMap[wallY][wallX] && !screen.sprites.spriteMap[wallY][wallX].visible) {
+                screen.sprites.spriteMap[wallY][wallX].visible = true;
+                screen.sprites.visibleSprites.push(screen.sprites.spriteMap[wallY][wallX]);
             }
 
             // is this point inside a wall block?
@@ -152,9 +151,9 @@ App.define('Raycasting', 'engine', (function(fn) {
             wallY = Math.floor(y + (up ? -1 : 0));
             wallX = Math.floor(x);
 
-            if (screen.spriteMap[wallY][wallX] && !screen.spriteMap[wallY][wallX].visible) {
-                screen.spriteMap[wallY][wallX].visible = true;
-                screen.visibleSprites.push(screen.spriteMap[wallY][wallX]);
+            if (screen.sprites.spriteMap[wallY][wallX] && !screen.sprites.spriteMap[wallY][wallX].visible) {
+                screen.sprites.spriteMap[wallY][wallX].visible = true;
+                screen.sprites.visibleSprites.push(screen.sprites.spriteMap[wallY][wallX]);
             }
 
             if (miniMap.level.map[wallY][wallX] > 0) {

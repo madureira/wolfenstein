@@ -4,6 +4,8 @@ This is a javascript implementation of the game Wolfenstein 3D.
 Wolfenstein 3D is a first-person shooter video game developed by id Software and published by Apogee Software.
 Originally released on May 5, 1992, for the PC operating system DOS.
 
+![alt tag](https://raw.github.com/madureira/wolfenstein/master/src/resources/icons/github-logo.jpg)
+
 
 ## Dependencies
 
@@ -45,7 +47,7 @@ Run the executable file:
 Run the executable file:
 
 ```sh
-    bin\wolfenstein\osx64\wolfenstein.exe
+    bin/wolfenstein/osx64/wolfenstein.app
 ```
 
 

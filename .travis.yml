@@ -6,6 +6,7 @@ before_install:
   - "npm install -g karma-cli"
 before_script:
   - "npm install -g karma-cli gulp@3.6.2"
+script:
   - "./node_modules/.bin/gulp build"
 matrix:
   fast_finish: true

@@ -14,7 +14,7 @@
     "main"              : "index.html",
 
     "devDependencies"   : {
-        "gulp"                      : "~3.6.2",
+        "gulp"                      : "3.6.2",
         "gulp-concat"               : "~2.2.0",
         "gulp-uglify"               : "~0.3.0",
         "gulp-less"                 : "~1.3.6",
@@ -47,5 +47,5 @@
         "resizable": false
     },
 
-    "engines"         : { "node": ">= 0.10.28" }
+    "engines"         : { "node": ">= 0.11.3" }
 }

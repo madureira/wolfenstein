@@ -59,11 +59,12 @@ var cssVendors = [
 ];
 
 
-gulp.task('build', function () {
+// Generate the binary files for Linux or Windows
+gulp.task('build', ['buildTemplates', 'buildJsVendors', 'buildJsSources', 'buidCssVendors', 'buildCssSources'], function () {
     var nw = new NwBuilder({
         version: '0.11.0',
         files: ['./package.json', './index.html', './build/**/*', './src/resources/**/*'],
-        platforms: ['win64', 'linux64'],
+        platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64'],
         buildDir: './bin'
     });
 
@@ -81,7 +82,7 @@ gulp.task('build', function () {
 
 // concat all js files in order
 gulp.task('buildJsSources', function() {
-    gulp.src(jsPackages)
+    return gulp.src(jsPackages)
         .pipe(jshint())
         .pipe(jshint.reporter(stylish))
         .pipe(concat(FINAL_NAME + '.js'))
@@ -96,7 +97,7 @@ gulp.task('buildJsSources', function() {
 
 // concat all js vendors
 gulp.task('buildJsVendors', function() {
-    gulp.src(jsVendors)
+    return gulp.src(jsVendors)
         .pipe(uglify())
         .pipe(concat(FINAL_NAME + '.vendors.min.js'))
         .pipe(gulp.dest('./build'))
@@ -107,7 +108,7 @@ gulp.task('buildJsVendors', function() {
 
 // generate all templates
 gulp.task('buildTemplates', function() {
-    gulp.src(templates)
+    return gulp.src(templates)
         .pipe(handlebars())
         .pipe(defineModule('plain', {
             wrapper: 'App.template["<%= templateName %>"] = <%= handlebars %>',
@@ -135,7 +136,7 @@ gulp.task('buildTemplates', function() {
 
 // concat all css sources.
 gulp.task('buildCssSources', function() {
-    gulp.src(cssPackage)
+    return gulp.src(cssPackage)
         .pipe(concat(FINAL_NAME + '.css'))
         .pipe(less())
         .pipe(gulp.dest('./build'))
@@ -150,7 +151,7 @@ gulp.task('buildCssSources', function() {
 
 // concat all css vendors
 gulp.task('buidCssVendors', function() {
-    gulp.src(cssVendors)
+    return gulp.src(cssVendors)
         .pipe(concat(FINAL_NAME + '.vendors.css'))
         .pipe(gulp.dest('./build'))
         .pipe(filesize())

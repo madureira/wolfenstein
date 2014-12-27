@@ -1,4 +1,7 @@
 describe("Helpful", function() {
+    var el = document.createElement("div");
+    el.id = 'stage';
+    document.body.appendChild(el);
 
     var helpful = App.Helpful;
 

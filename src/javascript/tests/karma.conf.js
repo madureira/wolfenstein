@@ -5,9 +5,9 @@ module.exports = function(config) {
         frameworks: ['jasmine'],
         files: [
             "build/wolfenstein.vendors.min.js",
-            "build/wolfenstein.templates.js",
+            "build/wolfenstein.templates.min.js",
             "build/wolfenstein.js",
-            "src/javascript/tests/**/*.test.js"
+            "src/javascript/tests/**/*.test.js",
         ],
         colors: true
     });

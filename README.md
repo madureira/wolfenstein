@@ -61,8 +61,12 @@ Run the executable file:
 | M             | Show level map          |
 
 
+---
 
-## Running unit tests
+## Development
+To execute the game and modify the code in runtime, open the file index.html in your browser (Supported browser: Google Chrome).
+
+### Running unit tests
 
 ```sh
     $ karma start src/javascript/tests/karma.conf.js

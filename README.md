@@ -1,4 +1,4 @@
-# Wolfenstein 3D
+# Wolfenstein 3D [![NPM version][npm-image]][npm-url]
 
 This is a javascript implementation of the game Wolfenstein 3D.
 Wolfenstein 3D is a first-person shooter video game developed by id Software and published by Apogee Software.

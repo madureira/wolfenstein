@@ -51,13 +51,15 @@ Run the executable file:
 
 ## Controls
 
-W / ▲  = move foward
-S / ▼  = move backward
-A / ◄  = turn left
-D / ►  = turn right
+| Keys          | Function                |
+| ------------- |:-----------------------:|
+| W / ↑         | move foward             |
+| S / ↓         | move backward           |
+| A / ←         | turn left               |
+| D / →         | turn right              |
+| F             | Show Frames per second  |
+| M             | Show level map          |
 
-F      = Show Frames per second
-M      = Show level map
 
 
 ## Running unit tests

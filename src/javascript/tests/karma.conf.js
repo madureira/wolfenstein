@@ -23,7 +23,8 @@ module.exports = function(config) {
         reporters: ['progress', 'coverage'],
 
         preprocessors: {
-            '**/*.js': 'coverage'
+            'build/wolfenstein.js': 'coverage'
+            'src/javascript/tests/**/*.test.js': 'coverage'
         },
 
         coverageReporter: {

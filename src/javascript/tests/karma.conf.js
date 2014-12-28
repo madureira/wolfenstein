@@ -37,6 +37,6 @@ module.exports = function(config) {
             'karma-phantomjs-launcher',
         ],
 
-        singleRun: false
+        singleRun: true
     });
 };

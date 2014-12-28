@@ -10,7 +10,6 @@ App.define('Raycasting', 'engine', (function(fn) {
     'use strict';
 
     var fov         = 60 * Math.PI / 180,
-        fovHalf     = fov / 2,
         twoPI       = Math.PI * 2;
 
     /**
@@ -37,7 +36,6 @@ App.define('Raycasting', 'engine', (function(fn) {
      */
     fn.prototype.castRays = function() {
         var stripIdx = 0;
-        var self = this;
 
         for (var i=0; i < this.numRays; i++) {
             // where on the screen does ray go through?
@@ -268,7 +266,7 @@ App.define('Raycasting', 'engine', (function(fn) {
         texX += (wallIsShaded ? width : 0);
 
         var styleWidth = Math.floor(width * 2);
-        if (strip.oldStyles.width != styleWidth) {
+        if (strip.oldStyles.width !== styleWidth) {
             strip.style.width = styleWidth +"px";
             strip.oldStyles.width = styleWidth;
         }

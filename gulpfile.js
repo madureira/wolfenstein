@@ -12,6 +12,7 @@ var handlebars = require('gulp-handlebars');
 var defineModule = require('gulp-define-module');
 var header = require('gulp-header');
 var NwBuilder = require('node-webkit-builder');
+var coveralls = require('gulp-coveralls');
 
 
 
@@ -175,8 +176,15 @@ gulp.task('prepare', [
     'buildJsVendors',
     'buildJsSources',
     'buidCssVendors',
-    'buildCssSources'
-]);
+    'buildCssSources']);
+
+
+// Coverage
+gulp.task('coverage', function() {
+    gulp.src('src/javascript/tests/coverage/**/lcov.info')
+        .pipe(coveralls());
+});
+
 
 
 // default Task

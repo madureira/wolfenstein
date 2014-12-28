@@ -1,6 +1,6 @@
 {
     "name"              : "wolfenstein",
-    "version"           : "1.0.0",
+    "version"           : "0.1.0",
     "description"       : "The Wolfenstein 3D implemented in javascript.",
     "keywords"          : [ "Wolfenstein", "javascript", "nodejs" ],
     "homepage"          : "https://github.com/madureira/wolfenstein",
@@ -14,10 +14,12 @@
     "main"              : "index.html",
 
     "scripts": {
-           "test": "./node_modules/.bin/gulp prepare && ./node_modules/karma/bin/karma start ./src/javascript/tests/karma.conf.js --single-run --browsers PhantomJS"
+        "pretest":      "./node_modules/.bin/gulp prepare",
+        "test":         "./node_modules/karma/bin/karma start ./src/javascript/tests/karma.conf.js",
+        "coveralls":    "gulp coverage"
     },
 
-    "devDependencies"   : {
+    "devDependencies": {
         "gulp"                      : "3.6.2",
         "gulp-concat"               : "~2.2.0",
         "gulp-uglify"               : "~0.3.0",
@@ -35,6 +37,8 @@
         "karma"                     : "~0.12.28",
         "karma-phantomjs-launcher"  : "0.1.4",
         "karma-jasmine"             : "0.1.5",
+        "karma-coverage"            : "~0.1",
+        "gulp-coveralls"            : "0.1.3",
         "node-webkit-builder"       : "1.0.4"
     },
 
@@ -52,5 +56,5 @@
         "resizable": false
     },
 
-    "engines"         : { "node": ">= 0.11.3" }
+    "engines": { "node": ">= 0.11.3" }
 }

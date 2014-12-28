@@ -59,7 +59,9 @@ App.define('Raycasting', 'engine', (function(fn) {
 
         // first make sure the angle is between 0 and 360 degrees
         rayAngle %= twoPI;
-        if (rayAngle < 0) rayAngle += twoPI;
+        if (rayAngle < 0) {
+            rayAngle += twoPI;
+        }
 
         // moving right/left? up/down? Determined by which quadrant the angle is in.
         var right = (rayAngle > twoPI * 0.75 || rayAngle < twoPI * 0.25);
@@ -117,7 +119,9 @@ App.define('Raycasting', 'engine', (function(fn) {
 
                 wallType = miniMap.level.map[wallY][wallX]; // we'll remember the type of wall we hit for later
                 textureX = y % 1;   // where exactly are we on the wall? textureX is the x coordinate on the texture that we'll use when texturing the wall.
-                if (!right) textureX = 1 - textureX; // if we're looking to the left side of the map, the texture should be reversed
+                if (!right) {
+                    textureX = 1 - textureX; // if we're looking to the left side of the map, the texture should be reversed
+                }
 
                 xHit = x;   // save the coordinates of the hit. We only really use these to draw the rays on minimap.
                 yHit = y;
@@ -170,7 +174,9 @@ App.define('Raycasting', 'engine', (function(fn) {
 
                     wallType = miniMap.level.map[wallY][wallX];
                     textureX = x % 1;
-                    if (up) textureX = 1 - textureX;
+                    if (up) {
+                        textureX = 1 - textureX;
+                    }
 
                     wallIsShaded = false;
                 }

@@ -5,7 +5,7 @@
     "keywords"          : [ "Wolfenstein", "javascript", "nodejs" ],
     "homepage"          : "https://github.com/madureira/wolfenstein",
 
-    "author"            : "Rafael Madureira dos Santos",
+    "author"            : "Rafael Madureira dos Santos <rafael.madureira.santos@gmail.com>",
 
     "bugs"              : { "url": "https://github.com/madureira/wolfenstein/issues" },
     "repository"        : { "type": "git", "url": "https://github.com/madureira/wolfenstein.git" },
@@ -14,7 +14,7 @@
     "main"              : "index.html",
 
     "scripts": {
-           "test": "./node_modules/.bin/karma start ./src/javascript/tests/karma.conf.js --single-run --browsers PhantomJS"
+           "test": "./node_modules/.bin/gulp prepare && ./node_modules/karma/bin/karma start ./src/javascript/tests/karma.conf.js --single-run --browsers PhantomJS"
     },
 
     "devDependencies"   : {

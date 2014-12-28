@@ -169,13 +169,23 @@ gulp.task('watch', function() {
 });
 
 
+// Prepare to tests
+gulp.task('prepare', [
+    'buildTemplates',
+    'buildJsVendors',
+    'buildJsSources',
+    'buidCssVendors',
+    'buildCssSources'
+]);
+
+
 // default Task
 gulp.task('default', [
-            'buildTemplates',
-            'buildJsVendors',
-            'buildJsSources',
-            'buidCssVendors',
-            'buildCssSources',
-            'watch'
+    'buildTemplates',
+    'buildJsVendors',
+    'buildJsSources',
+    'buidCssVendors',
+    'buildCssSources',
+    'watch'
 ]);
 

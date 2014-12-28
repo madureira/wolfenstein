@@ -1,4 +1,4 @@
-# Wolfenstein 3D [![Build Status: Linux](https://travis-ci.org/madureira/wolfenstein.svg)](https://travis-ci.org/madureira/wolfenstein) [![Coverage Status](https://coveralls.io/repos/madureira/wolfenstein/badge.png)](https://coveralls.io/r/madureira/wolfenstein)
+# Wolfenstein 3D [![Build Status: Linux](https://travis-ci.org/madureira/wolfenstein.svg)](https://travis-ci.org/madureira/wolfenstein) [![Coverage Status](https://coveralls.io/repos/madureira/wolfenstein/badge.png)](https://coveralls.io/r/madureira/wolfenstein) [![Code Climate](https://codeclimate.com/github/madureira/wolfenstein/badges/gpa.svg)](https://codeclimate.com/github/madureira/wolfenstein)
 
 This is a javascript implementation of the game Wolfenstein 3D.
 Wolfenstein 3D is a first-person shooter video game developed by id Software and published by Apogee Software.

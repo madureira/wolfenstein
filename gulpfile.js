@@ -180,7 +180,7 @@ gulp.task('prepare', [
 
 
 // Coverage
-gulp.task('coverage', function() {
+gulp.task('coveralls', function() {
     gulp.src('src/javascript/tests/coverage/**/lcov.info')
         .pipe(coveralls());
 });

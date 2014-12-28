@@ -14,8 +14,9 @@
     "main"              : "index.html",
 
     "scripts": {
-        "pretest":      "./node_modules/.bin/gulp prepare",
-        "test":         "./node_modules/karma/bin/karma start ./src/javascript/tests/karma.conf.js"
+        "pretest"   : "./node_modules/.bin/gulp prepare",
+        "test"      : "./node_modules/karma/bin/karma start ./src/javascript/tests/karma.conf.js",
+        "coveralls" : "gulp coveralls"
     },
 
     "devDependencies": {

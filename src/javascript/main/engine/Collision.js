@@ -28,8 +28,9 @@ App.define('Collision', 'engine', (function(fn) {
             y : fromY
         };
 
-        if (toY < 0 || toY >= miniMap.mapHeight || toX < 0 || toX >= miniMap.mapWidth)
+        if (toY < 0 || toY >= miniMap.mapHeight || toX < 0 || toX >= miniMap.mapWidth) {
             return pos;
+        }
 
         var blockX = Math.floor(toX);
         var blockY = Math.floor(toY);
@@ -68,10 +69,11 @@ App.define('Collision', 'engine', (function(fn) {
             dx = toX - blockX;
             dy = toY - blockY;
             if (dx*dx+dy*dy < radius*radius) {
-                if (dx*dx > dy*dy)
+                if (dx*dx > dy*dy) {
                     toX = pos.x = blockX + radius;
-                else
+                } else {
                     toY = pos.y = blockY + radius;
+                }
             }
         }
 
@@ -80,10 +82,11 @@ App.define('Collision', 'engine', (function(fn) {
             dx = toX - (blockX+1);
             dy = toY - blockY;
             if (dx*dx+dy*dy < radius*radius) {
-                if (dx*dx > dy*dy)
+                if (dx*dx > dy*dy) {
                     toX = pos.x = blockX + 1 - radius;
-                else
+                } else {
                     toY = pos.y = blockY + radius;
+                }
             }
         }
 
@@ -92,10 +95,11 @@ App.define('Collision', 'engine', (function(fn) {
             dx = toX - blockX;
             dy = toY - (blockY+1);
             if (dx*dx+dy*dy < radius*radius) {
-                if (dx*dx > dy*dy)
+                if (dx*dx > dy*dy) {
                     toX = pos.x = blockX + radius;
-                else
+                } else {
                     toY = pos.y = blockY + 1 - radius;
+                }
             }
         }
 
@@ -104,10 +108,11 @@ App.define('Collision', 'engine', (function(fn) {
             dx = toX - (blockX+1);
             dy = toY - (blockY+1);
             if (dx*dx+dy*dy < radius*radius) {
-                if (dx*dx > dy*dy)
+                if (dx*dx > dy*dy) {
                     toX = pos.x = blockX + 1 - radius;
-                else
+                } else {
                     toY = pos.y = blockY + 1 - radius;
+                }
             }
         }
 
@@ -116,18 +121,21 @@ App.define('Collision', 'engine', (function(fn) {
 
     function _isBlocking(x,y, miniMap, screen) {
         // first make sure that we cannot move outside the boundaries of the level
-        if (y < 0 || y >= miniMap.mapHeight || x < 0 || x >= miniMap.mapWidth)
+        if (y < 0 || y >= miniMap.mapHeight || x < 0 || x >= miniMap.mapWidth) {
             return true;
+        }
 
         var ix = Math.floor(x);
         var iy = Math.floor(y);
 
         // return true if the map block is not 0, ie. if there is a blocking wall.
-        if (miniMap.level.map[iy][ix] !== 0)
+        if (miniMap.level.map[iy][ix] !== 0) {
             return true;
+        }
 
-        if (screen.sprites.spriteMap[iy][ix] && screen.sprites.spriteMap[iy][ix].block)
+        if (screen.sprites.spriteMap[iy][ix] && screen.sprites.spriteMap[iy][ix].block) {
             return true;
+        }
 
         return false;
     }

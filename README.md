@@ -18,7 +18,7 @@ Originally released on May 5, 1992, for the PC operating system DOS.
 
 ```sh
     $ npm install
-    $ npm install -g karma-cli gulp@3.6.2
+    $ npm install -g karma-cli gulp
     $ gulp
 ```
 

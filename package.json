@@ -32,6 +32,7 @@
         "gulp-handlebars"           : "~3.0.1",
         "gulp-define-module"        : "~0.1.1",
         "gulp-header"               : "~1.2.2",
+        "gulp-clean"                : "~0.3.1",
         "jshint-stylish"            : "~1.0.0",
         "jasmine-node-karma"        : "~1.6.1",
         "karma"                     : "~0.12.28",

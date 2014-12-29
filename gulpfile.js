@@ -13,6 +13,7 @@ var defineModule = require('gulp-define-module');
 var header = require('gulp-header');
 var NwBuilder = require('node-webkit-builder');
 var coveralls = require('gulp-coveralls');
+var clean = require('gulp-clean');
 
 
 
@@ -170,21 +171,27 @@ gulp.task('watch', function() {
 });
 
 
+// Coverage
+gulp.task('coveralls', ['sendToCoveralls'], function() {
+    return gulp.src('src/javascript/tests/coverage/', {read: false})
+        .pipe(clean());
+});
+
+
+gulp.task('sendToCoveralls', function() {
+    return gulp.src('src/javascript/tests/coverage/**/lcov.info')
+        .pipe(coveralls());
+});
+
+
 // Prepare to tests
 gulp.task('prepare', [
     'buildTemplates',
     'buildJsVendors',
     'buildJsSources',
     'buidCssVendors',
-    'buildCssSources']);
-
-
-// Coverage
-gulp.task('coveralls', function() {
-    gulp.src('src/javascript/tests/coverage/**/lcov.info')
-        .pipe(coveralls());
-});
-
+    'buildCssSources'
+]);
 
 
 // default Task

@@ -74,7 +74,7 @@ To execute the game and modify the code in runtime, open the file index.html in 
 ### Running unit tests
 
 ```sh
-    $ karma start src/javascript/tests/karma.conf.js
+    $ npm test
 ```
 
 

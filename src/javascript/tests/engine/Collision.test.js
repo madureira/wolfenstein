@@ -17,6 +17,7 @@ describe("engine/Collision", function() {
         var newPosition = collision.checkCollision(fromX, fromY, toX, toY, radius, miniMap, screen);
 
         expect(newPosition.x).toEqual(fromX);
+        expect(newPosition.y).toEqual(fromY);
     });
 
 });

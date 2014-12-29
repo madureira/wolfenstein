@@ -14,12 +14,15 @@ App.Helpful = {
     },
 
     hasOnlyNumbers: function(list) {
+        var isNumber = true;
         for (var i=0; i < list.length; i++) {
-            if (!App.Helpful.isNumber(list[i]))
-                return false; break;
+            if (!App.Helpful.isNumber(list[i])) {
+                isNumber = false;
+                break;
+            }
         }
 
-        return true;
+        return isNumber;
     },
 
     isArray: function(array) {
@@ -40,7 +43,7 @@ App.Helpful = {
     },
 
     isNodeWebkit: function() {
-        return (typeof process == "object");
+        return (typeof process === "object");
     }
 
 };

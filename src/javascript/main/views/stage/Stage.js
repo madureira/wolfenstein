@@ -16,7 +16,8 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
         GameCycle = App.engine.GameCycle,
         Player = App.engine.Player,
         Raycasting = App.engine.Raycasting,
-        Sprites = App.engine.Sprites;
+        Sprites = App.engine.Sprites,
+        Enemies = App.engine.Enemies;
 
     /**
      * Build the stage.
@@ -45,6 +46,9 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
 
         var sprites = new Sprites($);
         sprites.init(levelMap.map, levelMap.objects);
+
+        var enemies = new Enemies($);
+        enemies.init(levelMap.enemies);
 
         screen.addSprites(sprites);
 

@@ -1,5 +1,9 @@
 App.maps.firstLevel = {
 
+    playerX: 10.5,
+
+    playerY: 6.5,
+
     map: [
             [1,1,1,1,1,1,1,1,5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
             [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -50,45 +54,50 @@ App.maps.firstLevel = {
         }
     ],
 
-    playerX: 10.5,
-    playerY: 6.5,
-
     objects: [
         {
-            img : 'lamp.png',
+            img: 'lamp.png',
             positionX: 10,
             positionY: 7,
-            block : false
+            block: false
         },
         {
-            img : 'lamp.png',
+            img: 'lamp.png',
             positionX: 15,
             positionY: 7,
-            block : false
+            block: false
         },
         {
-            img : 'tablechairs.png',
+            img: 'tablechairs.png',
             positionX: 10,
             positionY: 18,
-            block : true
+            block: true
         },
         {
-            img : 'tablechairs.png',
+            img: 'tablechairs.png',
             positionX: 15,
             positionY: 18,
-            block : true
+            block: true
         },
         {
-            img : 'plantgreen.png',
+            img: 'plantgreen.png',
             positionX: 10,
             positionY: 11,
-            block : true
+            block: true
         },
         {
-            img : 'plantgreen.png',
+            img: 'plantgreen.png',
             positionX: 15,
             positionY: 11,
-            block : true
+            block: true
+        }
+    ],
+
+    enemies: [
+        {
+            type: 'guard',
+            positionX: 12,
+            positionY: 13
         }
     ]
 

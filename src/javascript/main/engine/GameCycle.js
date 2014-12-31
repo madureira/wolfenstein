@@ -12,7 +12,6 @@ App.define('GameCycle', 'engine', (function(fn) {
     var FPS = App.Properties.fps;
 
     var GAME_CYCLE_DELAY = 1000/FPS;
-    //var GAME_CYCLE_DELAY = 3000;
 
     var lastGameCycleTime = 0;
     var lastRenderCycleTime = 0;
@@ -51,6 +50,8 @@ App.define('GameCycle', 'engine', (function(fn) {
 
         this.player.move(this.miniMap, this.screen, timeDelta, GAME_CYCLE_DELAY);
 
+        this.screen.enemies.ai(timeDelta, this.player, this.miniMap, this.screen, GAME_CYCLE_DELAY);
+
         var cycleDelay = GAME_CYCLE_DELAY;
 
         // The timer will likely not run that fast
@@ -79,6 +80,7 @@ App.define('GameCycle', 'engine', (function(fn) {
         this.screen.sprites.clearObjects();
         this.raycasting.castRays();
         this.screen.sprites.renderObjects(this.player, this.raycasting.viewDist, this.screen.screenWidth, this.screen.screenHeight);
+        this.screen.enemies.render(this.player, this.raycasting.viewDist, this.screen);
 
         // time since last rendering
         var now = new Date().getTime();

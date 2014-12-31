@@ -60,6 +60,17 @@ App.define('Screen', 'engine', (function(fn) {
         this.sprites = sprites;
     };
 
+    /**
+     * Add enemies on the screen.
+     *
+     * @param App.engine.Enemies
+     *
+     * @return void
+     */
+    fn.prototype.addEnemies = function(enemies) {
+        this.enemies = enemies;
+    };
+
     return fn;
 
 }));

@@ -1,7 +1,6 @@
 App.maps.firstLevel = {
 
     playerX: 10.5,
-
     playerY: 6.5,
 
     map: [
@@ -96,8 +95,8 @@ App.maps.firstLevel = {
     enemies: [
         {
             type: 'guard',
-            positionX: 12,
-            positionY: 13
+            positionX: 17.5,
+            positionY: 6
         }
     ]
 

@@ -38,7 +38,7 @@ App.define('Player', 'engine', (function(fn) {
 
         this.setControls();
 
-        this.collision = new App.engine.Collision();
+        this.entity = new App.engine.Entity();
     };
 
     /**
@@ -51,38 +51,7 @@ App.define('Player', 'engine', (function(fn) {
      * @return void;
      */
     fn.prototype.move = function(miniMap, screen, timeDelta, gameCycleDelay) {
-        // Time timeDelta has passed since we moved last time
-        // We should have moved after time gameCycleDelay,
-        // so calculate how much we should multiply our
-        // movement to ensure game speed is contant
-        var mul = timeDelta / gameCycleDelay;
-
-        // Player will move this far along
-        // the current direction vector
-        var moveStep = mul * this.speed * this.moveSpeed;
-
-        // Add rotation if player is rotating (player.dir != 0)
-        this.rotDeg += mul * this.dir * this.rotSpeed;
-        this.rotDeg %= 360;
-
-        var snap = (this.rotDeg + 360) % 90;
-        if (snap < 2 || snap > 88) {
-            this.rotDeg = Math.round(this.rotDeg / 90) * 90;
-        }
-
-        this.rot = this.rotDeg * Math.PI / 180;
-
-        //this.rot += this.dir * this.rotSpeed;
-
-        // Calculate new player position with simple trigonometry
-        var newX = this.x + Math.cos(this.rot) * moveStep;
-        var newY = this.y + Math.sin(this.rot) * moveStep;
-
-        var pos = this.collision.checkCollision(this.x, this.y, newX, newY, 0.35, miniMap, screen);
-
-        // Set new position
-        this.x = pos.x;
-        this.y = pos.y;
+        this.entity.move(this, timeDelta, miniMap, screen, gameCycleDelay);
     };
 
     /**

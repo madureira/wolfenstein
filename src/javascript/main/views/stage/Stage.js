@@ -51,6 +51,7 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
         enemies.init(levelMap.enemies);
 
         screen.addSprites(sprites);
+        screen.addEnemies(enemies);
 
         var gameCycle = new GameCycle();
         var player = new Player(levelMap.playerX, levelMap.playerY);

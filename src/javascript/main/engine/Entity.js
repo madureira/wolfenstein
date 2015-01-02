@@ -1,3 +1,8 @@
+/**
+ * Prototype responsible to defines some actions to Player/Enemies.
+ *
+ * @para contextFunction fn
+ */
 App.define('Entity', 'engine', (function(fn) {
     'use strict';
 
@@ -5,6 +10,17 @@ App.define('Entity', 'engine', (function(fn) {
         this.collision = new App.engine.Collision();
     };
 
+    /**
+     * Move the entity.
+     *
+     * @param Entity entity
+     * @param Float timDelta
+     * @param App.engine.MiniMap miniMap
+     * @param App.engine.Screen screen
+     * @param Integer gameCycleDelay
+     *
+     * @return void
+     */
     fn.prototype.move = function(entity, timeDelta, miniMap, screen, gameCycleDelay) {
         // time timeDelta has passed since we moved last time. We should have moved after time gameCycleDelay,
         // so calculate how much we should multiply our movement to ensure game speed is constant

@@ -132,7 +132,7 @@ App.define('Enemies', 'engine', (function(fn) {
                     oldStyles.display = styleDisplay;
                 }
 
-                styleClip = 'rect(1px, ' + (size*(enemy.state+1)) + 'px, ' + size + 'px, ' + (size*(enemy.state)) + 'px)';
+                styleClip = 'rect(0px, ' + (size*(enemy.state+1)) + 'px, ' + size + 'px, ' + (size*(enemy.state)) + 'px)';
                 if (styleClip !== oldStyles.clip) {
                     style.clip = styleClip;
                     oldStyles.clip = styleClip;
@@ -149,8 +149,6 @@ App.define('Enemies', 'engine', (function(fn) {
 
     fn.prototype.ai = function(timeDelta, player, miniMap, screen, gameCycleDelay) {
         var i=0;
-        var walkCycleTime = 1000;
-        var numWalkSprites = 4;
 
         for (i; i < this.enemiesAmount; i++) {
             var enemy = this.enemiesList[i];
@@ -166,8 +164,7 @@ App.define('Enemies', 'engine', (function(fn) {
                 enemy.rot = angle;
                 enemy.speed = 1;
 
-                enemy.state = Math.floor((new Date() % walkCycleTime) / (walkCycleTime / enemy.totalStates)) + 1;
-
+                enemy.state = Math.floor((new Date() % enemy.walkCycleTime) / (enemy.walkCycleTime / enemy.numWalkSprites)) + 1;
             } else {
                 enemy.state = 0;
                 enemy.speed = 0;

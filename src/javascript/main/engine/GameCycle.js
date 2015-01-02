@@ -12,6 +12,7 @@ App.define('GameCycle', 'engine', (function(fn) {
     var FPS = App.Properties.fps;
 
     var GAME_CYCLE_DELAY = 1000/FPS;
+    //var GAME_CYCLE_DELAY = 1000;
 
     var lastGameCycleTime = 0;
     var lastRenderCycleTime = 0;

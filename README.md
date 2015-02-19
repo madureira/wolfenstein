@@ -79,4 +79,3 @@ To execute the game and modify the code in runtime, open the file index.html in 
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/madureira/wolfenstein/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

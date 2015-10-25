@@ -4,3 +4,5 @@ cache/
 bin/
 wolfenstein.nw
 src/javascript/tests/coverage/
+
+.DS_Store

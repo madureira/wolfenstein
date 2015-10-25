@@ -11,51 +11,50 @@ Originally released on May 5, 1992, for the PC operating system DOS.
 
 
 ## Dependencies
-
-1. Node >= 0.11.3
+1. Node >= 4.1.2
 
 
 ## How to generate source files
-
 ```sh
-    $ npm install
-    $ npm install -g karma-cli gulp
-    $ gulp prepare
+$ npm install
+$ npm run prepare
 ```
 
 
 ## How to Play?
-First of all, we need to generate binary files.
-If your system is 32 bits, you should change the version on bin/wolfenstein/PLATAFORM{version}/ to run executable file.
-
+When you run:
 ```sh
-    $ gulp build
+    $ npm run build
 ```
+Is generated executables to each plataform inside:
+```
+bin/wolfenstein/
+```
+Choose your plataform and enjoy :)
+
 
 ### Linux
 Run the executable file:
-
 ```sh
     $ ./bin/wolfenstein/linux64/wolfenstein
 ```
 
+
 ### Windows
 Run the executable file:
-
 ```sh
     bin\wolfenstein\win64\wolfenstein.exe
 ```
 
+
 ### OSX
 Run the executable file:
-
 ```sh
-    bin/wolfenstein/osx64/wolfenstein.app
+    bin/wolfenstein/osx64/wolfenstein
 ```
 
 
 ## Controls
-
 | Keys          | Function                |
 | ------------- |:-----------------------:|
 | W / ↑         | move foward             |
@@ -65,18 +64,16 @@ Run the executable file:
 | F             | Show Frames per second  |
 | M             | Show level map          |
 
-
 ---
 
 ## Development
 To execute the game and modify the code in runtime, open the file index.html in your browser (Supported browser: Google Chrome).
+To edit files and see the changes at runtime, run in watch mode:
+```sh
+    $ npm run watch
+```
 
 ### Running unit tests
-
 ```sh
     $ npm test
 ```
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/madureira/wolfenstein/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

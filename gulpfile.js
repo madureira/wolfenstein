@@ -11,9 +11,9 @@ var stylish = require('jshint-stylish');
 var handlebars = require('gulp-handlebars');
 var defineModule = require('gulp-define-module');
 var header = require('gulp-header');
-var NwBuilder = require('node-webkit-builder');
+var NwBuilder = require('nw-builder');
 var coveralls = require('gulp-coveralls');
-var clean = require('gulp-clean');
+var rimraf = require('gulp-rimraf');
 
 
 
@@ -64,7 +64,7 @@ var cssVendors = [
 // Generate the binary files for Linux or Windows
 gulp.task('build', ['buildTemplates', 'buildJsVendors', 'buildJsSources', 'buidCssVendors', 'buildCssSources'], function () {
     var nw = new NwBuilder({
-        version: '0.11.0',
+        version: '0.12.3',
         files: ['./package.json', './index.html', './build/**/*', './src/resources/**/*'],
         platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64'],
         buildDir: './bin'
@@ -174,7 +174,7 @@ gulp.task('watch', function() {
 // Coverage
 gulp.task('coveralls', ['sendToCoveralls'], function() {
     return gulp.src('src/javascript/tests/coverage/', {read: false})
-        .pipe(clean());
+        .pipe(rimraf()); //cleaning
 });
 
 
@@ -203,4 +203,3 @@ gulp.task('default', [
     'buildCssSources',
     'watch'
 ]);
-

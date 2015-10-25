@@ -15,7 +15,7 @@ Or if you prefer is possible to download your O.S. executable version:
 
 * [Linux 32](http://wolfenstein.madureira.me/bin/wolfenstein/linux32.tar.gz)
 * [Linux 64](http://wolfenstein.madureira.me/bin/wolfenstein/linux64.tar.gz)
-* [Mac 32](http://wolfenstein.madureira.me/bin/wolfenstein/osx.tar.gz)
+* [Mac 32](http://wolfenstein.madureira.me/bin/wolfenstein/osx32.tar.gz)
 * [Mac 64](http://wolfenstein.madureira.me/bin/wolfenstein/osx64.tar.gz)
 * [Windows 32](http://wolfenstein.madureira.me/bin/wolfenstein/win32.tar.gz)
 * [Windows 64](http://wolfenstein.madureira.me/bin/wolfenstein/win64.tar.gz)

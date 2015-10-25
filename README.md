@@ -36,21 +36,21 @@ Choose your plataform and enjoy :)
 ### Linux
 Run the executable file:
 ```sh
-    $ ./bin/wolfenstein/linux64/wolfenstein
+    wolfenstein/bin/wolfenstein/linux64/wolfenstein
 ```
 
 
 ### Windows
 Run the executable file:
 ```sh
-    bin\wolfenstein\win64\wolfenstein.exe
+    wolfenstein\bin\wolfenstein\win64\wolfenstein.exe
 ```
 
 
 ### OSX
 Run the executable file:
 ```sh
-    bin/wolfenstein/osx64/wolfenstein
+    wolfenstein/bin/wolfenstein/osx64/wolfenstein
 ```
 
 

@@ -43,7 +43,8 @@
         "karma-jasmine"             : "~0.3.6",
         "karma-coverage"            : "~0.5.3",
         "gulp-coveralls"            : "~0.1.4",
-        "nw-builder"                : "~2.0.2"
+        "nw-builder"                : "~2.0.2",
+        "phantomjs"                 : "~1.9.18"
     },
 
     "window": {

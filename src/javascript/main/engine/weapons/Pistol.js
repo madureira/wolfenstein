@@ -29,6 +29,7 @@ App.define('Pistol', 'engine/weapons', (function(fn) {
             'pistol_0.png'
         ];
 
+        _preLoadImages(this.frames);
         _rest(this);
     };
 
@@ -43,6 +44,14 @@ App.define('Pistol', 'engine/weapons', (function(fn) {
             }
         }
     };
+
+    function _preLoadImages(frames) {
+        var size = frames.length;
+        for (var i = 0; i < size; i++) {
+            var image = new Image();
+            image.src = SPRITE_PATH + frames[i];
+        }
+    }
 
     function _animate(self, img, frame, time) {
         setTimeout(function() {

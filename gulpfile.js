@@ -56,8 +56,7 @@ var cssPackage = [
 
 // css vendors sources
 var cssVendors = [
-    './src/stylesheet/main/vendors/reset.css',
-    './src/stylesheet/main/vendors/bootstrap.min.css'
+    './src/stylesheet/main/vendors/reset.css'
 ];
 
 

@@ -29,7 +29,7 @@ App.define('Guard', 'engine/enemies', (function(fn) {
         this.walkCycleTime = 1000;
         this.numWalkSprites = 4;
 
-        var img = $selector.byTag('img');
+        var img = $selector.createTag('img');
         img.src = SPRITE_PATH + WALK_FRAMES;
         img.style.display = 'none';
         img.style.position = 'absolute';

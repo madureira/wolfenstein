@@ -33,7 +33,7 @@ App.define('StatusBar', 'engine', (function(fn) {
     };
 
     function _createStatusBarImage($selector) {
-        var img = $selector.byTag('img');
+        var img = $selector.createTag('img');
         img.src = SPRITE_PATH + STATUS_BAR_IMG;
         img.id = 'status-bar';
         return img;

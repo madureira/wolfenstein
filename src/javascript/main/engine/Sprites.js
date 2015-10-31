@@ -40,7 +40,7 @@ App.define('Sprites', 'engine', (function(fn) {
         for (var i=0; i < objsLength; i++) {
             var sprite = objs[i];
 
-            var img = this.$selector.byTag('img');
+            var img = this.$selector.createTag('img');
 
             img.src = App.Properties.spritesPath + sprite.img;
             img.style.display = "none";

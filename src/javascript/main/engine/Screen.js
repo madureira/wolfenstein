@@ -29,7 +29,7 @@ App.define('Screen', 'engine', (function(fn) {
         var screen = this.$selector.byId('screen');
 
         for (var i=0; i < this.screenWidth; i += this.stripWidth) {
-            var strip = this.$selector.byTag('img');
+            var strip = this.$selector.createTag('img');
 
             strip.style.position = 'absolute';
             strip.style.left = '0px';

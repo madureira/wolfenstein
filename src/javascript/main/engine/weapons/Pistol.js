@@ -61,7 +61,7 @@ App.define('Pistol', 'engine/weapons', (function(fn) {
     }
 
     function _rest(self) {
-        var img = self.$.byTag('img');
+        var img = self.$.createTag('img');
         img.src = SPRITE_PATH + 'pistol_0.png';
         img.id = 'weapon';
         img.className = 'pistol';

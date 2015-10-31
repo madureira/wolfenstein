@@ -12,8 +12,11 @@ App.Properties = {
             byId: function(id) {
                 return document.getElementById(id);
             },
-            byTag: function(tagName) {
+            createTag: function(tagName) {
                 return document.createElement(tagName);
+            },
+            getByTag: function(tagName) {
+                return document.getElementsByTagName(tagName)[0];
             }
         };
     })(),

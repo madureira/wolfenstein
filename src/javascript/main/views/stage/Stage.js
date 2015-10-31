@@ -26,6 +26,11 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
      * @return void
      */
     fn.prototype.init = function() {
+        var body;
+        if (!App.Helpful.isNodeWebkit()) {
+            body = $.getByTag('body');
+            body.className = 'in-browser';
+        }
         var $stage = $.byId(App.container);
         _buildHTMLElements($stage);
         _initGameCycle();

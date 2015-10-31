@@ -10,6 +10,7 @@ App.define('Pistol', 'engine/weapons', (function(fn) {
     'use strict';
 
     var SPRITE_PATH = App.Properties.statusbarPath + 'pistol/',
+        SOUND_PATH = App.Properties.soundPath + 'weapons/',
         FRAME_TRANSITION_TIME = 50,
         remainingFrames = 0;
 
@@ -18,6 +19,9 @@ App.define('Pistol', 'engine/weapons', (function(fn) {
     };
 
     fn.prototype.init = function() {
+        this.soundPistolShooting = new App.engine.Sound(this.$);
+        this.soundPistolShooting.init('pistol', SOUND_PATH + 'pistol', false);
+
         this.frames = [
             'pistol_0.png',
             'pistol_4.png',
@@ -37,7 +41,6 @@ App.define('Pistol', 'engine/weapons', (function(fn) {
         if (remainingFrames === 0) {
             var self = this;
             var size = self.frames.length;
-
             remainingFrames = size;
             for (var i = 0; i < size; i++) {
                 _animate(self, self.img, self.frames[i], FRAME_TRANSITION_TIME * i);
@@ -56,7 +59,14 @@ App.define('Pistol', 'engine/weapons', (function(fn) {
     function _animate(self, img, frame, time) {
         setTimeout(function() {
             img.src = SPRITE_PATH + frame;
-            remainingFrames = --remainingFrames;
+            if (remainingFrames == 2) {
+                self.soundPistolShooting.reset();
+                self.soundPistolShooting.play();
+            }
+
+            if (remainingFrames > 0) {
+                remainingFrames--;
+            }
         }, time);
     }
 

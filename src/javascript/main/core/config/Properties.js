@@ -25,6 +25,7 @@ App.Properties = {
     texturesPath: 'src/resources/textures/',
     spritesPath: 'src/resources/sprites/',
     statusbarPath: 'src/resources/statusbar/',
+    soundPath: 'src/resources/sounds/',
     fps: 30,
 
     playerSpeed: 0.18,

@@ -3,7 +3,7 @@
  *
  * @param fn contextFunction
  *
- * @author rmadureira
+ * @author madureira
  *
  */
 App.define('Raycasting', 'engine', (function(fn) {
@@ -139,7 +139,7 @@ App.define('Raycasting', 'engine', (function(fn) {
 
 
         // now check against horizontal lines. It's basically the same, just "turned around".
-        // the only difference here is that once we hit a map block, 
+        // the only difference here is that once we hit a map block,
         // we check if there we also found one in the earlier, vertical run. We'll know that if dist != 0.
         // If so, we only register this hit if this distance is smaller.
 

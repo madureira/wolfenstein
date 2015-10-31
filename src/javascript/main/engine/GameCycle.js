@@ -3,7 +3,7 @@
  *
  * @param fn contextFunction
  *
- * @author rmadureira
+ * @author madureira
  *
  */
 App.define('GameCycle', 'engine', (function(fn) {
@@ -30,11 +30,12 @@ App.define('GameCycle', 'engine', (function(fn) {
      *
      * @return Function init
      */
-    fn.prototype.setElements = function(player, miniMap, screen, raycasting) {
+    fn.prototype.setElements = function(player, miniMap, screen, raycasting, statusBar) {
         this.player = player;
         this.miniMap = miniMap;
         this.raycasting = raycasting;
         this.screen = screen;
+        this.statusBar = statusBar;
         this.fpsDebug = new App.engine.FPSDebug();
     };
 
@@ -52,6 +53,8 @@ App.define('GameCycle', 'engine', (function(fn) {
         this.player.move(this.miniMap, this.screen, timeDelta, GAME_CYCLE_DELAY);
 
         this.screen.enemies.ai(timeDelta, this.player, this.miniMap, this.screen, GAME_CYCLE_DELAY);
+
+        this.statusBar.update();
 
         var cycleDelay = GAME_CYCLE_DELAY;
 

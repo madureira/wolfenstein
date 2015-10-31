@@ -21,6 +21,7 @@ App.Properties = {
     templateEngine: App.template,
     texturesPath: 'src/resources/textures/',
     spritesPath: 'src/resources/sprites/',
+    statusbarPath: 'src/resources/statusbar/',
     fps: 30,
 
     playerSpeed: 0.18,
@@ -37,6 +38,6 @@ App.Properties = {
     miniMapObjectElementId: 'minimapobjects',
     miniMapScale: 4,
     miniMapBlocksColor: '#000',
-    miniMapDebugMode: false
+    miniMapDebugMode: true
 
 };

@@ -3,7 +3,7 @@
  *
  * @param fn contextFunction
  *
- * @author rmadureira
+ * @author madureira
  *
  */
 App.define('Controls', 'engine', (function(fn) {
@@ -36,6 +36,9 @@ App.define('Controls', 'engine', (function(fn) {
 
         // F
         this.enableFPSDisplay = 70;
+
+        // SPACE
+        this.shoot = [0, 32];
     };
 
     /**
@@ -52,6 +55,8 @@ App.define('Controls', 'engine', (function(fn) {
 
         var $minimap = $selector.byId('minimap-container');
         var $fpsDisplay = $selector.byId('fps-debug');
+
+        var shootEvent = new Event('shoot');
 
         document.onkeydown = function(e) {
             e = e || window.event;
@@ -95,6 +100,10 @@ App.define('Controls', 'engine', (function(fn) {
                         $fpsDisplay.style.display = 'block';
                     }
                     break;
+
+                case self.shoot[0]:
+                case self.shoot[1]:
+                    document.dispatchEvent(shootEvent);
             }
         };
 

@@ -3,7 +3,7 @@
  *
  * @param fn context function
  *
- * @author rmadureira
+ * @author madureira
  */
 App.define('FPSDebug', 'engine', (function(fn) {
     'use strict';

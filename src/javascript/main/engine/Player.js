@@ -3,7 +3,7 @@
  *
  * @param fn contextFunction
  *
- * @author rmadureira
+ * @author madureira
  *
  */
 App.define('Player', 'engine', (function(fn) {

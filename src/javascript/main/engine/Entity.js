@@ -2,6 +2,9 @@
  * Prototype responsible to defines some actions to Player/Enemies.
  *
  * @para contextFunction fn
+ *
+ * @author madureira
+ * 
  */
 App.define('Entity', 'engine', (function(fn) {
     'use strict';

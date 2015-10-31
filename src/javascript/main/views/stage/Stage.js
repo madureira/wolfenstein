@@ -5,7 +5,7 @@
  * @param $ selector engine
  * @param tmpl template engine
  *
- * @author rmadureira
+ * @author madureira
  *
  */
 App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
@@ -17,7 +17,8 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
         Player = App.engine.Player,
         Raycasting = App.engine.Raycasting,
         Sprites = App.engine.Sprites,
-        Enemies = App.engine.Enemies;
+        Enemies = App.engine.Enemies,
+        StatusBar = App.engine.StatusBar;
 
     /**
      * Build the stage.
@@ -58,7 +59,9 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
 
         var raycasting = new Raycasting(player, miniMap, screen);
 
-        gameCycle.setElements(player, miniMap, screen, raycasting);
+        var statusBar = new StatusBar($);
+
+        gameCycle.setElements(player, miniMap, screen, raycasting, statusBar);
         gameCycle.init();
         gameCycle.renderCycle();
     }

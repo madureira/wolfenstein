@@ -25,7 +25,7 @@ Or if you prefer is possible to download your O.S. executable version:
 1. Node >= 4.1.2
 
 
-## How to generate source files
+## How to generate source files?
 ```sh
 $ npm install
 $ npm run prepare

@@ -18,8 +18,8 @@
         "test"      : "./node_modules/.bin/karma start ./src/javascript/tests/karma.conf.js",
         "coveralls" : "./node_modules/.bin/gulp coveralls",
         "prepare"   : "./node_modules/.bin/gulp prepare",
-        "build"     : "./node_modules/.bin/gulp prepare && ./node_modules/.bin/gulp build",
-        "watch"     : "./node_modules/.bin/gulp prepare && ./node_modules/.bin/gulp watch"
+        "watch"     : "./node_modules/.bin/gulp prepare && ./node_modules/.bin/gulp watch",
+        "build"     : "./node_modules/.bin/gulp prepare && ./node_modules/.bin/gulp build && echo 'Compressing files...' && tar -zcf bin/wolfenstein/win32.tar.gz bin/wolfenstein/win32 && tar -zcf bin/wolfenstein/win64.tar.gz bin/wolfenstein/win64 && tar -zcf bin/wolfenstein/osx32.tar.gz bin/wolfenstein/osx32 && tar -zcf bin/wolfenstein/osx64.tar.gz bin/wolfenstein/osx64 && tar -zcf bin/wolfenstein/linux32.tar.gz bin/wolfenstein/linux32 && tar -zcf bin/wolfenstein/linux64.tar.gz bin/wolfenstein/linux64 && echo 'Finished!'"
     },
 
     "devDependencies": {

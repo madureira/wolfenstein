@@ -38,6 +38,6 @@ App.Properties = {
     miniMapObjectElementId: 'minimapobjects',
     miniMapScale: 4,
     miniMapBlocksColor: '#000',
-    miniMapDebugMode: true
+    miniMapDebugMode: false
 
 };

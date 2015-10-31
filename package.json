@@ -19,7 +19,7 @@
         "coveralls" : "./node_modules/.bin/gulp coveralls",
         "prepare"   : "./node_modules/.bin/gulp prepare",
         "watch"     : "./node_modules/.bin/gulp prepare && ./node_modules/.bin/gulp watch",
-        "build"     : "./node_modules/.bin/gulp prepare && ./node_modules/.bin/gulp build && echo 'Compressing files...' && tar -zcf bin/wolfenstein/win32.tar.gz bin/wolfenstein/win32 && tar -zcf bin/wolfenstein/win64.tar.gz bin/wolfenstein/win64 && tar -zcf bin/wolfenstein/osx32.tar.gz bin/wolfenstein/osx32 && tar -zcf bin/wolfenstein/osx64.tar.gz bin/wolfenstein/osx64 && tar -zcf bin/wolfenstein/linux32.tar.gz bin/wolfenstein/linux32 && tar -zcf bin/wolfenstein/linux64.tar.gz bin/wolfenstein/linux64 && echo 'Finished!'"
+        "build"     : "rm -rf ./bin && ./node_modules/.bin/gulp prepare && ./node_modules/.bin/gulp build && echo 'Compressing files...' && cd bin/wolfenstein && tar -zcf win32.tar.gz win32 && tar -zcf win64.tar.gz win64 && tar -zcf osx32.tar.gz osx32 && tar -zcf osx64.tar.gz osx64 && tar -zcf linux32.tar.gz linux32 && tar -zcf linux64.tar.gz linux64 && echo 'Finished!' && cd -"
     },
 
     "devDependencies": {

@@ -68,10 +68,11 @@ Run the executable file:
 ## Controls
 | Keys          | Function                |
 | ------------- |:-----------------------:|
-| W / ↑         | move foward             |
-| S / ↓         | move backward           |
-| A / ←         | turn left               |
-| D / →         | turn right              |
+| W / ↑         | Move foward             |
+| S / ↓         | Move backward           |
+| A / ←         | Turn left               |
+| D / →         | Turn right              |
+| SPACE BAR     | Shoot                   |
 | F             | Show Frames per second  |
 | M             | Show level map          |
 

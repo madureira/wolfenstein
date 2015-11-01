@@ -17,6 +17,7 @@ App.define('StatusBar', 'engine', (function(fn) {
         console.log('[StatusBar] Creating the status bar');
         this.$selector = $selector;
         this.weapon = new App.engine.Weapon($selector);
+        this.reactions = new App.engine.FaceReaction($selector);
         this.init();
     };
 
@@ -26,6 +27,7 @@ App.define('StatusBar', 'engine', (function(fn) {
 
         $screen.appendChild(this.weapon.default());
         $screen.appendChild(statusBar);
+        $screen.appendChild(this.reactions.faces());
     };
 
     fn.prototype.update = function() {

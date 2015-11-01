@@ -16,6 +16,19 @@ App.define('FaceReaction', 'engine', (function(fn) {
             'face01',
             'face02',
             'face03',
+            'face02',
+            'face01',
+            'face01',
+            'face01',
+            'face02',
+            'face02',
+            'face03',
+            'face03',
+            'face01',
+            'face03',
+            'face01',
+            'face02',
+            'face03',
             'face02'
         ];
 

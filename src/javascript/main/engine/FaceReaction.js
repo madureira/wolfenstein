@@ -46,7 +46,7 @@ App.define('FaceReaction', 'engine', (function(fn) {
     function _startAnimate(self) {
 
         var interval = FRAME_TRANSITION_TIME*frames.length;
-        for(var x=0; x < 10; x++) {
+        for(var x=0; x < 100; x++) {
             _animate(self, interval * x);
         }
     }

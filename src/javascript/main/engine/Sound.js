@@ -16,10 +16,11 @@ App.define('Sound', 'engine', (function(fn) {
         return this;
     };
 
-    fn.prototype.init = function(id, soundUrl, autoPlay) {
+    fn.prototype.init = function(id, soundUrl, autoPlay, repeat) {
         this.audio = this.$.createTag('audio');
         this.audio.setAttribute("id", id);
         this.audio.autoplay = autoPlay;
+        this.audio.loop = repeat;
 
         var source = this.$.createTag('source');
         source.setAttribute('src', soundUrl + '.wav');

@@ -103,6 +103,12 @@ App.maps.firstLevel = {
             positionX: 18,
             positionY: 6
         }
-    ]
+    ],
+
+    backgroundSound: {
+        id: 'sound-level-01',
+        track: 'level_01',
+        type: 'wav'
+    }
 
 };

@@ -20,7 +20,7 @@ App.define('Pistol', 'engine/weapons', (function(fn) {
 
     fn.prototype.init = function() {
         this.soundPistolShooting = new App.engine.Sound(this.$);
-        this.soundPistolShooting.init('pistol', SOUND_PATH + 'pistol', false);
+        this.soundPistolShooting.init('pistol', SOUND_PATH + 'pistol', false, false);
 
         this.frames = [
             'pistol_0.png',

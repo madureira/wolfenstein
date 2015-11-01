@@ -18,7 +18,9 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
         Raycasting = App.engine.Raycasting,
         Sprites = App.engine.Sprites,
         Enemies = App.engine.Enemies,
-        StatusBar = App.engine.StatusBar;
+        StatusBar = App.engine.StatusBar,
+        Sound = App.engine.Sound,
+        BG_SOUND_PATH = App.Properties.soundPath + 'levels/';
 
     /**
      * Build the stage.
@@ -66,7 +68,11 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
 
         var statusBar = new StatusBar($);
 
-        gameCycle.setElements(player, miniMap, screen, raycasting, statusBar);
+        var bgSound = levelMap.backgroundSound;
+        var levelSound = new Sound($);
+        levelSound.init(bgSound.id, BG_SOUND_PATH + bgSound.track, true, true);
+
+        gameCycle.setElements(player, miniMap, screen, raycasting, statusBar, levelSound);
         gameCycle.init();
         gameCycle.renderCycle();
     }

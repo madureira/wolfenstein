@@ -30,13 +30,15 @@ App.define('GameCycle', 'engine', (function(fn) {
      *
      * @return Function init
      */
-    fn.prototype.setElements = function(player, miniMap, screen, raycasting, statusBar) {
+    fn.prototype.setElements = function(player, miniMap, screen, raycasting, statusBar, levelSound) {
         this.player = player;
         this.miniMap = miniMap;
         this.raycasting = raycasting;
         this.screen = screen;
         this.statusBar = statusBar;
         this.fpsDebug = new App.engine.FPSDebug();
+        this.levelSound = levelSound;
+        this.levelSound.play();
     };
 
     /**

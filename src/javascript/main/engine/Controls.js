@@ -56,7 +56,16 @@ App.define('Controls', 'engine', (function(fn) {
         var $minimap = $selector.byId('minimap-container');
         var $fpsDisplay = $selector.byId('fps-debug');
 
-        var shootEvent = new Event('shoot');
+        var shootEvent;
+
+        try {
+            // Chrome, Safari, Firefox
+            shootEvent = new Event('shoot');
+        } catch (e) {
+            // PhantomJS (wat!)
+            shootEvent = document.createEvent('CustomEvent');
+            shootEvent.initCustomEvent('shoot', false, false, null);
+        }
 
         document.onkeydown = function(e) {
             e = e || window.event;

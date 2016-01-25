@@ -42,6 +42,7 @@ App.define('MiniMap', 'engine', (function(fn) {
         _drawMiniMap(this.level, this.$selector);
     };
 
+
     /**
      * Redraw the miniMap and position player again.
      *

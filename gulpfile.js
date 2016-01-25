@@ -162,6 +162,7 @@ gulp.task('buidCssVendors', function() {
 
 // watch the modifications and re-build.
 gulp.task('watch', function() {
+    gulp.start('default');
     gulp.watch(jsPackages, ['buildJsSources']);
     gulp.watch(jsVendors, ['buildJsVendors']);
     gulp.watch(templates, ['buildTemplates']);

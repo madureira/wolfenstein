@@ -39,6 +39,8 @@ App.define('Player', 'engine', (function(fn) {
         this.setControls();
 
         this.entity = new App.engine.Entity();
+
+        this.shootListener();
     };
 
     /**
@@ -63,6 +65,26 @@ App.define('Player', 'engine', (function(fn) {
         var controls = new App.engine.Controls();
 
         controls.keyboardMap(this);
+    };
+
+    fn.prototype.shootListener = function() {
+        var self = this;
+        document.addEventListener('shoot', function (e) {
+            self.shoot(self);
+        }, false);
+    };
+
+    fn.prototype.shoot = function(self) {
+        var shoot = { 
+            type: 'PLAYER_SHOOT',
+            gunType: 'pistol',
+            x: self.x,
+            y: self.y,
+            rotDeg: self.rotDeg,
+            dir: self.dir
+        };
+
+        document.gameEvents.postEvent(shoot);
     };
 
     return fn;

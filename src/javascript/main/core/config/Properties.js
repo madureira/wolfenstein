@@ -17,6 +17,11 @@ App.Properties = {
             },
             getByTag: function(tagName) {
                 return document.getElementsByTagName(tagName)[0];
+            },
+            removeById: function(id) {
+                var elem = document.getElementById(id);
+                var parentNode = elem.parentNode;
+                parentNode.removeChild(elem);
             }
         };
     })(),

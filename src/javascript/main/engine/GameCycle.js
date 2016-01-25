@@ -30,7 +30,7 @@ App.define('GameCycle', 'engine', (function(fn) {
      *
      * @return Function init
      */
-    fn.prototype.setElements = function(player, miniMap, screen, raycasting, statusBar, levelSound) {
+    fn.prototype.setElements = function(player, miniMap, screen, raycasting, statusBar, levelSound, gameEvents) {
         this.player = player;
         this.miniMap = miniMap;
         this.raycasting = raycasting;
@@ -39,6 +39,7 @@ App.define('GameCycle', 'engine', (function(fn) {
         this.fpsDebug = new App.engine.FPSDebug();
         this.levelSound = levelSound;
         this.levelSound.play();
+        this.gameEvents = gameEvents;
     };
 
     /**
@@ -92,6 +93,8 @@ App.define('GameCycle', 'engine', (function(fn) {
         var now = new Date().getTime();
         var timeDelta = now - lastRenderCycleTime;
         var cycleDelay = GAME_CYCLE_DELAY;
+
+        this.gameEvents.process(this.player, this.raycasting.viewDist, this.screen, this.miniMap, cycleDelay, timeDelta);
 
         if (timeDelta > cycleDelay) {
             cycleDelay = Math.max(1, cycleDelay - (timeDelta - cycleDelay));

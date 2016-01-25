@@ -20,6 +20,7 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
         Enemies = App.engine.Enemies,
         StatusBar = App.engine.StatusBar,
         Sound = App.engine.Sound,
+        GameEvents = App.engine.GameEvents,
         BG_SOUND_PATH = App.Properties.soundPath + 'levels/';
 
     /**
@@ -72,7 +73,12 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
         var levelSound = new Sound($);
         levelSound.init(bgSound.id, BG_SOUND_PATH + bgSound.track, true, true);
 
-        gameCycle.setElements(player, miniMap, screen, raycasting, statusBar, levelSound);
+        var gameEvents = new GameEvents($);
+
+        // set game events to be accessed globaly
+        document.gameEvents = gameEvents;
+
+        gameCycle.setElements(player, miniMap, screen, raycasting, statusBar, levelSound, gameEvents);
         gameCycle.init();
         gameCycle.renderCycle();
     }

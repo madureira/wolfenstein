@@ -23,9 +23,8 @@ App.define('Shoot', 'engine', (function(fn) {
         this.rot = 0;
         this.rotDeg = shoot.rotDeg;
         this.dir = 0;
-        this.speed = 0;
-        this.moveSpeed = 0.050;
-        //this.moveSpeed = 0.0100;
+        this.speed = shoot.speed;
+        this.moveSpeed = shoot.moveSpeed;
         this.rotSpeed = 3;
         this.totalStates = 3;
         this.walkCycleTime = 250;

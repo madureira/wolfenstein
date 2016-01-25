@@ -81,7 +81,8 @@ App.define('Player', 'engine', (function(fn) {
             x: self.x,
             y: self.y,
             rotDeg: self.rotDeg,
-            dir: self.dir
+            moveSpeed: 0.100,
+            speed: 10
         };
 
         document.gameEvents.postEvent(shoot);

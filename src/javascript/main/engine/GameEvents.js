@@ -26,6 +26,7 @@ App.define('GameEvents', 'engine', (function(fn) {
                 var collided = _renderShoot(shoot, this.entity, player, viewDist, screen, miniMap, gameCycleDelay, timeDelta);
 
                 if (collided) {
+                    console.log('>>>>>X<<<<<<');
                     this.$selector.removeById(shoot.id);
                     delete this.playerShoots[i];
                 }
@@ -41,9 +42,10 @@ App.define('GameEvents', 'engine', (function(fn) {
                 id: 'shoot-' + _idGenerator(),
                 positionX: eventObject.x,
                 positionY: eventObject.y,
-                direction: eventObject.dir,
                 rotDeg: eventObject.rotDeg,
-                gunType: eventObject.gunType
+                gunType: eventObject.gunType,
+                moveSpeed: eventObject.moveSpeed,
+                speed: eventObject.speed
             };
 
             var shoot = new App.engine.Shoot(shootData, this.$selector);
@@ -102,7 +104,7 @@ App.define('GameEvents', 'engine', (function(fn) {
             size = viewDist / (Math.cos(angle) * dist);
 
             if (size <= 0) {
-                return;
+                return false;
             }
 
             x = Math.tan(angle) * viewDist;
@@ -167,23 +169,19 @@ App.define('GameEvents', 'engine', (function(fn) {
         dy = player.y - shoot.y;
         dist = Math.sqrt(dx*dx + dy*dy);
 
-        //if (dist > 0.0001) {
-            angle = Math.atan2(dy, dx);
-            //shoot.rotDeg = player.rotDeg;
-            shoot.speed = 10;
-            shoot.state = Math.floor((new Date() % shoot.walkCycleTime) / (shoot.walkCycleTime / shoot.numWalkSprites)) + 1;
+        angle = Math.atan2(dy, dx);
+        shoot.state = Math.floor((new Date() % shoot.walkCycleTime) / (shoot.walkCycleTime / shoot.numWalkSprites)) + 1;
 
-            var oldX = shoot.x;
-            var oldY = shoot.y;
+        var oldX = shoot.x;
+        var oldY = shoot.y;
 
-            var collided = false;
+        var collided = false;
 
-            entity.move(shoot, timeDelta, miniMap, screen, gameCycleDelay);
+        entity.move(shoot, timeDelta, miniMap, screen, gameCycleDelay);
 
-            if (shoot.x === oldX || shoot.y === oldY) {
-                collided = true;
-            }
-        //}
+        if (shoot.x === oldX || shoot.y === oldY) {
+            collided = true;
+        }
 
         return collided;
     }

@@ -33,7 +33,7 @@ App.Properties = {
     soundPath: 'src/resources/sounds/',
     fps: 30,
 
-    playerSpeed: 0.18,
+    playerSpeed: 0.20,
 
     playerRotateSpeed: 3,
 

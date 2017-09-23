@@ -115,13 +115,9 @@ gulp.task('buildTemplates', function() {
             wrapper: 'App.template["<%= templateName %>"] = <%= handlebars %>',
             context: function(context) {
                 var file = context.file;
-                var fullPath = file.path;
+                var fullPath = file.path.replace(/\\/g,'/');
                 var tplPath = fullPath.split("javascript/main/templates/").pop();
-
-                var find = '/';
-                var regex = new RegExp(find, 'g');
-
-                var name = tplPath.replace(regex, '.').replace('.js', '');
+                var name = tplPath.replace(new RegExp('/', 'g'), '.').replace('.js', '');
 
                 return { templateName: name };
             }

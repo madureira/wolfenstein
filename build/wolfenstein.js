@@ -17,6 +17,11 @@ App.Properties = {
             },
             getByTag: function(tagName) {
                 return document.getElementsByTagName(tagName)[0];
+            },
+            removeById: function(id) {
+                var elem = document.getElementById(id);
+                var parentNode = elem.parentNode;
+                parentNode.removeChild(elem);
             }
         };
     })(),
@@ -28,7 +33,7 @@ App.Properties = {
     soundPath: 'src/resources/sounds/',
     fps: 30,
 
-    playerSpeed: 0.18,
+    playerSpeed: 0.20,
 
     playerRotateSpeed: 3,
 
@@ -903,7 +908,7 @@ App.define('GameCycle', 'engine', (function(fn) {
      *
      * @return Function init
      */
-    fn.prototype.setElements = function(player, miniMap, screen, raycasting, statusBar, levelSound) {
+    fn.prototype.setElements = function(player, miniMap, screen, raycasting, statusBar, levelSound, gameEvents) {
         this.player = player;
         this.miniMap = miniMap;
         this.raycasting = raycasting;
@@ -912,6 +917,7 @@ App.define('GameCycle', 'engine', (function(fn) {
         this.fpsDebug = new App.engine.FPSDebug();
         this.levelSound = levelSound;
         this.levelSound.play();
+        this.gameEvents = gameEvents;
     };
 
     /**
@@ -966,6 +972,8 @@ App.define('GameCycle', 'engine', (function(fn) {
         var timeDelta = now - lastRenderCycleTime;
         var cycleDelay = GAME_CYCLE_DELAY;
 
+        this.gameEvents.process(this.player, this.raycasting.viewDist, this.screen, this.miniMap, cycleDelay, timeDelta);
+
         if (timeDelta > cycleDelay) {
             cycleDelay = Math.max(1, cycleDelay - (timeDelta - cycleDelay));
         }
@@ -980,6 +988,211 @@ App.define('GameCycle', 'engine', (function(fn) {
 
         this.fpsDebug.update(1000 / timeDelta);
     };
+
+    return fn;
+
+}));
+
+/**
+ * Prototype responsible to manager all game events.
+ *
+ * @param fn contextFunction
+ *
+ * @author madureira
+ *
+ */
+App.define('GameEvents', 'engine', (function(fn) {
+    'use strict';
+
+    fn = function($selector) {
+        console.log('[GameEvents] Preparing to manager all game events');
+        this.$selector = $selector;
+        this.playerShoots = [];
+        this.entity = new App.engine.Entity();
+    };
+
+    fn.prototype.process = function(player, viewDist, screen, miniMap, gameCycleDelay, timeDelta) {
+        var self = this;
+
+        if (this.playerShoots.length > 0) {
+            for (var i=0; this.playerShoots.length > i; i++) {
+                var shoot = this.playerShoots[i];
+
+                var collided = _renderShoot(shoot, this.entity, player, viewDist, screen, miniMap, gameCycleDelay, timeDelta);
+
+                if (collided) {
+                    this.$selector.removeById(shoot.id);
+                    delete this.playerShoots[i];
+                }
+            }
+        }
+    };
+
+    fn.prototype.postEvent = function(eventObject) {
+        var $screen = this.$selector.byId('screen');
+
+        if (eventObject.type === 'PLAYER_SHOOT') {
+            var shootData = {
+                id: 'shoot-' + _idGenerator(),
+                positionX: eventObject.x,
+                positionY: eventObject.y,
+                rotDeg: eventObject.rotDeg,
+                gunType: eventObject.gunType,
+                moveSpeed: eventObject.moveSpeed,
+                speed: eventObject.speed
+            };
+
+            var shoot = new App.engine.Shoot(shootData, this.$selector);
+
+            this.playerShoots.push(shoot);
+
+            $screen.appendChild(shoot.img);
+        }
+    };
+
+    function _renderShoot(shoot, entity, player, viewDist, screen, miniMap, gameCycleDelay, timeDelta) {
+        if (shoot === undefined) {
+            return false;
+        }
+
+        var sameX = player.x === shoot.x;
+        var sameY = player.y === shoot.y;
+        var sameRot = player.rotDeg === shoot.rotDeg;
+        var img = shoot.img;
+
+        var dx = shoot.x - player.x;
+        var dy = shoot.y - player.y;
+
+        var angle = Math.atan2(dy, dx) - player.rot;
+
+        if (angle < -Math.PI) {
+            angle += 2 * Math.PI;
+        }
+
+        if (angle >= Math.PI) {
+            angle -= 2 * Math.PI;
+        }
+
+        var distSquared = 0;
+        var dist = 0;
+        var size = 0;
+        var x = Math.tan(angle) * viewDist;
+        var style = null;
+        var oldStyles = null;
+        var styleWidth = null;
+        var styleTop = null;
+        var styleLeft = null;
+        var styleZIndex = 0;
+        var styleDisplay = 'none';
+        var styleClip = null;
+
+        if (angle > -Math.PI * 0.5 && angle < Math.PI * 0.5) {
+            distSquared = dx*dx + dy*dy;
+            dist = Math.sqrt(distSquared);
+            size = viewDist / (Math.cos(angle) * dist);
+
+            if (size <= 0) {
+                return false;
+            }
+
+            x = Math.tan(angle) * viewDist;
+
+            style = img.style;
+            oldStyles = shoot.oldStyles;
+
+            // height is equal to the sprite size
+            if (size !== oldStyles.height) {
+                style.height =  size + 'px';
+                oldStyles.height = size;
+            }
+
+            // width is equal to the sprite size times the total number of states
+            styleWidth = size * shoot.totalStates;
+
+            if (styleWidth !== oldStyles.width) {
+                style.width = styleWidth + 'px';
+                oldStyles.width = styleWidth;
+            }
+
+            // top position is halfway down the screen, minus half the sprite height
+            styleTop = ((screen.screenHeight - size) / 2);
+            if (styleTop != oldStyles.top) {
+                style.top = styleTop + 'px';
+                oldStyles.top = styleTop;
+            }
+
+            // place at x position, adjusted for sprite size and the current sprite state
+            styleLeft = (screen.screenWidth / 2 + x - size/2 - size * shoot.state);
+            if (styleLeft !== oldStyles.left) {
+                style.left = styleLeft + 'px';
+                oldStyles.left = styleLeft;
+            }
+
+            styleZIndex = -(distSquared * 1000) >> 0;
+            if (styleZIndex !== oldStyles.zIndex) {
+                style.zIndex = styleZIndex;
+                oldStyles.zIndex = styleZIndex;
+            }
+
+            styleDisplay = 'block';
+            if (styleDisplay !== oldStyles.display) {
+                style.display = styleDisplay;
+                oldStyles.display = styleDisplay;
+            }
+
+            styleClip = 'rect(0px, ' + (size*(shoot.state+1)) + 'px, ' + size + 'px, ' + (size*(shoot.state)) + 'px)';
+            if (styleClip !== oldStyles.clip) {
+                style.clip = styleClip;
+                oldStyles.clip = styleClip;
+            }
+        } else {
+            styleDisplay = 'none';
+            if (styleDisplay !== shoot.oldStyles.display) {
+                img.style.display = styleDisplay;
+                shoot.oldStyles.display = styleDisplay;
+            }
+        }
+
+        dx = player.x - shoot.x;
+        dy = player.y - shoot.y;
+        dist = Math.sqrt(dx*dx + dy*dy);
+
+        angle = Math.atan2(dy, dx);
+        shoot.state = Math.floor((new Date() % shoot.walkCycleTime) / (shoot.walkCycleTime / shoot.numWalkSprites)) + 1;
+
+        var oldX = shoot.x;
+        var oldY = shoot.y;
+
+        var collided = false;
+
+        entity.move(shoot, timeDelta, miniMap, screen, gameCycleDelay);
+
+        if (shoot.x === oldX || shoot.y === oldY) {
+            collided = true;
+        }
+
+        return collided;
+    }
+
+    function _idGenerator() {
+        var length = 8;
+        var timestamp = + new Date();
+
+        var _getRandomInt = function( min, max ) {
+            return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+        };
+
+        var ts = timestamp.toString();
+        var parts = ts.split( "" ).reverse();
+        var id = "";
+
+        for( var i = 0; i < length; ++i ) {
+            var index = _getRandomInt( 0, parts.length - 1 );
+            id += parts[index];
+        }
+
+        return id;
+    }
 
     return fn;
 
@@ -1028,6 +1241,7 @@ App.define('MiniMap', 'engine', (function(fn) {
 
         _drawMiniMap(this.level, this.$selector);
     };
+
 
     /**
      * Redraw the miniMap and position player again.
@@ -1163,6 +1377,8 @@ App.define('Player', 'engine', (function(fn) {
         this.setControls();
 
         this.entity = new App.engine.Entity();
+
+        this.shootListener();
     };
 
     /**
@@ -1187,6 +1403,27 @@ App.define('Player', 'engine', (function(fn) {
         var controls = new App.engine.Controls();
 
         controls.keyboardMap(this);
+    };
+
+    fn.prototype.shootListener = function() {
+        var self = this;
+        document.addEventListener('shoot', function (e) {
+            self.shoot(self);
+        }, false);
+    };
+
+    fn.prototype.shoot = function(self) {
+        var shoot = { 
+            type: 'PLAYER_SHOOT',
+            gunType: 'pistol',
+            x: self.x,
+            y: self.y,
+            rotDeg: self.rotDeg,
+            moveSpeed: 0.100,
+            speed: 10
+        };
+
+        document.gameEvents.postEvent(shoot);
     };
 
     return fn;
@@ -1567,6 +1804,65 @@ App.define('Screen', 'engine', (function(fn) {
     fn.prototype.addEnemies = function(enemies) {
         this.enemies = enemies;
     };
+
+    return fn;
+
+}));
+
+/**
+ * Prototype responsible to manager a single shoot int the space.
+ *
+ * @param fn contextFunction
+ *
+ * @author madureira
+ *
+ */
+App.define('Shoot', 'engine', (function(fn) {
+    'use strict';
+
+    var SPRITE_PATH = App.Properties.spritesPath + 'shoot/';
+
+    fn = function(shoot, $selector) {
+        this.id = shoot.id;
+        this.cssRoot = 'shoot';
+        this.x = shoot.positionX;
+        this.y = shoot.positionY;
+        this.type = shoot.gunType;
+        this.state = 0;
+        this.rot = 0;
+        this.rotDeg = shoot.rotDeg;
+        this.dir = 0;
+        this.speed = shoot.speed;
+        this.moveSpeed = shoot.moveSpeed;
+        this.rotSpeed = 3;
+        this.totalStates = 3;
+        this.walkCycleTime = 250;
+        this.numWalkSprites = 2;
+
+        var img = $selector.createTag('img');
+        img.id = this.id;
+        img.src = SPRITE_PATH + 'shoot_' + this.type + '.png';
+        img.style.display = 'none';
+        img.style.position = 'absolute';
+        img.classList.add(this.cssRoot);
+
+        this.oldStyles = _getOldStyle();
+        this.img = img;
+
+        return this;
+    };
+
+    function _getOldStyle() {
+        return {
+            left: 0,
+            top: 0,
+            width: 0,
+            height: 0,
+            clip: "",
+            display: "none",
+            zIndex: 0
+        };
+    }
 
     return fn;
 
@@ -2136,6 +2432,7 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
         Enemies = App.engine.Enemies,
         StatusBar = App.engine.StatusBar,
         Sound = App.engine.Sound,
+        GameEvents = App.engine.GameEvents,
         BG_SOUND_PATH = App.Properties.soundPath + 'levels/';
 
     /**
@@ -2188,7 +2485,12 @@ App.define('Stage', 'views/stage', (function(fn, $, tmpl) {
         var levelSound = new Sound($);
         levelSound.init(bgSound.id, BG_SOUND_PATH + bgSound.track, true, true);
 
-        gameCycle.setElements(player, miniMap, screen, raycasting, statusBar, levelSound);
+        var gameEvents = new GameEvents($);
+
+        // set game events to be accessed globaly
+        document.gameEvents = gameEvents;
+
+        gameCycle.setElements(player, miniMap, screen, raycasting, statusBar, levelSound, gameEvents);
         gameCycle.init();
         gameCycle.renderCycle();
     }

@@ -1,0 +1,134 @@
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+}
+body {
+  -webkit-user-select: none;
+}
+button {
+  -webkit-app-region: no-drag;
+}
+/**
+ * Keep the image pixelad when scale.
+ */
+img {
+  image-rendering: pixelated;
+}
+#stage {
+  display: block;
+  margin: 0 auto;
+  width: 720px;
+}
+body.in-browser #stage {
+  margin-top: 50px;
+}
+body.in-browser #fps-debug {
+  top: 50px;
+}
+body.in-browser #github {
+  display: block;
+}
+#sounds {
+  display: none;
+}
+#fps-debug {
+  top: 0;
+  position: absolute;
+  display: none;
+  width: 310px;
+  height: 190px;
+  padding: 5px;
+  color: white;
+  font-family: lucida console, courier new;
+  font-size: 10px;
+  z-index: 100000001;
+}
+#minimap-container {
+  display: none;
+  position: relative;
+  float: right;
+  right: 135px;
+  top: -185px;
+}
+#minimap-container #minimap {
+  position: absolute;
+  background-color: #fff;
+  opacity: 0.3;
+}
+#minimap-container #minimapobjects {
+  position: absolute;
+}
+#floor {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #808080;
+  z-index: -10000000;
+}
+#ceiling {
+  position: absolute;
+  width: 720px;
+  height: calc(240px);
+  background-color: #383838;
+  z-index: -10000000;
+}
+#screen {
+  position: relative;
+  width: 720px;
+  height: 480px;
+  overflow: hidden;
+}
+#github {
+  display: none;
+  margin-top: 30px;
+  text-align: center;
+  color: #fff;
+  font-family: sans-serif;
+  position: absolute;
+  width: 720px;
+}
+#github a {
+  text-decoration: none;
+  color: #4078c0;
+  margin-left: 10px;
+}
+#github a:hover {
+  text-decoration: underline;
+}
+#status-bar {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+#weapon {
+  display: block;
+  width: 400px;
+  bottom: 80px;
+  margin: 0 auto;
+  z-index: 1;
+}
+#reactions {
+  position: absolute;
+  display: block;
+  width: 66px;
+  height: 76px;
+  z-index: 3;
+  left: 301px;
+  image-rendering: pixelated;
+  background-image: url("../src/resources/statusbar/reactions.png");
+  background-repeat: no-repeat;
+  background-size: 500px;
+}
+.face01 {
+  background-position: 1px -2px;
+}
+.face02 {
+  background-position: -62px -2px;
+}
+.face03 {
+  background-position: -125px -2px;
+}

@@ -9,16 +9,20 @@ Originally released on May 5, 1992, for the PC operating system DOS.
 
 ![alt tag](https://raw.github.com/madureira/wolfenstein/master/src/resources/icons/screenshot_01.png) ![alt tag](https://raw.github.com/madureira/wolfenstein/master/src/resources/icons/screenshot_02.png) ![alt tag](https://raw.github.com/madureira/wolfenstein/master/src/resources/icons/screenshot_03.png)
 
-To see it running in your browser, you can access: [Live Demo](http://madureira.github.io/wolfenstein/)
 
-Or if you prefer is possible to download your O.S. executable version:
+[Live Demo](http://madureira.github.io/wolfenstein/)
 
-* [Linux 32](http://wolfenstein.madureira.me/bin/wolfenstein/linux32.tar.gz)
-* [Linux 64](http://wolfenstein.madureira.me/bin/wolfenstein/linux64.tar.gz)
-* [Mac 32](http://wolfenstein.madureira.me/bin/wolfenstein/osx32.tar.gz)
-* [Mac 64](http://wolfenstein.madureira.me/bin/wolfenstein/osx64.tar.gz)
-* [Windows 32](http://wolfenstein.madureira.me/bin/wolfenstein/win32.tar.gz)
-* [Windows 64](http://wolfenstein.madureira.me/bin/wolfenstein/win64.tar.gz)
+
+## Controls
+| Keys          | Function                |
+| ------------- |:-----------------------:|
+| W / ↑         | Move foward             |
+| S / ↓         | Move backward           |
+| A / ←         | Turn left               |
+| D / →         | Turn right              |
+| SPACE BAR     | Shoot                   |
+| F             | Show Frames per second  |
+| M             | Show level map          |
 
 
 ## Dependencies
@@ -63,18 +67,6 @@ Run the executable file:
 ```sh
     wolfenstein/bin/wolfenstein/osx64/wolfenstein
 ```
-
-
-## Controls
-| Keys          | Function                |
-| ------------- |:-----------------------:|
-| W / ↑         | Move foward             |
-| S / ↓         | Move backward           |
-| A / ←         | Turn left               |
-| D / →         | Turn right              |
-| SPACE BAR     | Shoot                   |
-| F             | Show Frames per second  |
-| M             | Show level map          |
 
 ---
 

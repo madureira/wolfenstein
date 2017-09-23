@@ -12,8 +12,6 @@ App.define('Shoot', 'engine', (function(fn) {
     var SPRITE_PATH = App.Properties.spritesPath + 'shoot/';
 
     fn = function(shoot, $selector) {
-        console.log('[Shoot] Add a shoot in space');
-
         this.id = shoot.id;
         this.cssRoot = 'shoot';
         this.x = shoot.positionX;

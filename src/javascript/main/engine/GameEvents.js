@@ -26,7 +26,6 @@ App.define('GameEvents', 'engine', (function(fn) {
                 var collided = _renderShoot(shoot, this.entity, player, viewDist, screen, miniMap, gameCycleDelay, timeDelta);
 
                 if (collided) {
-                    console.log('>>>>>X<<<<<<');
                     this.$selector.removeById(shoot.id);
                     delete this.playerShoots[i];
                 }
@@ -64,12 +63,6 @@ App.define('GameEvents', 'engine', (function(fn) {
         var sameX = player.x === shoot.x;
         var sameY = player.y === shoot.y;
         var sameRot = player.rotDeg === shoot.rotDeg;
-
-        console.log('Player: x='+player.x+' | y='+player.y+' | rot='+player.rotDeg);
-        console.log('Shoot:  x='+shoot.x+' | y='+shoot.y+' | rot='+shoot.rotDeg);
-        console.log('SameX: ' + sameX, ' | SameY: ' + sameY+ ' | SameRot: ' + sameRot);
-        console.log('');
-
         var img = shoot.img;
 
         var dx = shoot.x - player.x;
@@ -209,4 +202,3 @@ App.define('GameEvents', 'engine', (function(fn) {
     return fn;
 
 }));
-

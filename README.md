@@ -9,7 +9,7 @@ Originally released on May 5, 1992, for the PC operating system DOS.
 
 ![alt tag](https://raw.github.com/madureira/wolfenstein/master/src/resources/icons/screenshot_01.png) ![alt tag](https://raw.github.com/madureira/wolfenstein/master/src/resources/icons/screenshot_02.png) ![alt tag](https://raw.github.com/madureira/wolfenstein/master/src/resources/icons/screenshot_03.png)
 
-To see it running in your browser, you can access: [Live Demo](http://wolfenstein.madureira.me)
+To see it running in your browser, you can access: [Live Demo](http://madureira.github.io/wolfenstein/)
 
 Or if you prefer is possible to download your O.S. executable version:
 
